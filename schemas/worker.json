@@ -1,0 +1,54 @@
+{
+[ Employees
+  {
+    "SynchFilter"  :
+    {
+      "Geography" :  "United States"
+      "State" : "New York",
+      "Group"  : "Technician",
+      "Search_Start_Date": "2020-09-25:12:25",
+      "Search_End_Date": "2020-09-26:01:45",
+      "Number_Rows" : 25,
+      "State_Last_Synch_Date"  : "None" or "2020-09-25:12:25"
+    }
+  },
+      [Employee
+        {
+          "laborcode": ,
+          "role" : "Master Electrician",
+          "type": "EM",
+          "orgid": "EAGLENA",
+          "worker_id": 21001,
+          "worksite": "BEDFORD",
+          "status": "ACTIVE",
+          "first name" : "John ",
+          "last name" : "Smith ",
+          "email" : "john@tech.com",
+          "phone" : "978-705-3333"
+          },
+        {
+          "laborcode": ,
+          "role" : "Electrician",
+          "type": "EM",
+          "orgid": "EAGLENA",
+          "worker_id": 21001,
+          "worksite": "BEDFORD",
+          "status": "ACTIVE",
+          "first name" : "John ",
+          "last name" : "smith ",
+          "email" : "john@tech.com",
+          "phone" : "401-333-4444"
+          }
+  ]
+        {
+          "laborcode": Get_Workers_Response.Response_Results.Workers_Response_Data.Worker.,
+          "role" : "Electrician",
+          "type": "EM",
+          "orgid": "EAGLENA",
+          "worker_id": 21002,
+          "worksite": "BEDFORD",
+          "status": "ACTIVE"
+        }
+      ]
+  ]
+}

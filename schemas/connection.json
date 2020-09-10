@@ -1,0 +1,25 @@
+{
+  "Workday": {
+    "WSDL": "https://wd2-impl-services1.workday.com/ccx/service/ibmsrv_dpt6/Human_Resources/v35.0?wsdl"
+  },
+    "AppConnect": {
+      "host": "TBD.com:8080",
+      "Worker_Post_URL": "/TBD",
+      "Oganization_Post_URL": "/TBD",
+      "Location_Post_URL": "/TBD"
+    },
+  "Maximo": {
+    "host": "https://52.116.33.175:9443/maximo"
+  },
+    "SynchFilterMessagFlow":
+    {
+      "Geography" :  "United States"
+      "State" : "Massachusetts",
+      "Site" : "BEDFORD",
+      "Group"  : "Technician",
+      "Search_Start_Date": "2020-09-25:12:25",
+      "Search_End_Date": "2020-09-26:01:45",
+      "Number_Rows" : 25,
+      "State_Last_Synch_Date"  : "None" or "2020-09-25:12:25"
+    }
+}
