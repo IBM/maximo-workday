@@ -21,27 +21,38 @@
   - A new browser tab will open showing  apply the `in progress`    ![Cloud Pak for Integration entitlement](images/cloud_pak_for_integration_install_progress.png) to your cluster  &nbsp;  
   - Click `show logs` button to see the details of the installation progress
   - The Worksspace is created
-  - Click "Apply Plan"  ![in your workspace](images/cloud_pak_for_integration_workspace)
+  - Click "Apply Plan"  ![in your workspace](images/cloud_pak_for_integration_workspace.png)
   - Click "Offering Dashboard" ![IBM Cloud Catalog](images/catalog.png) Accept token exceptions
   - Select Red Hat authentication mechanism for  ![OpenShif Authenticationt ](images/cloud_pak_for_integration_authentication.png]) which will then open the 
   
+
+# Create an App Connect Record Batch Processing of Workday Resources
+Use App Connect Workspace, Bar File to implement or Record distribution to load xml files for workday resources into Maimo
+  - Install [App Connect Enterprise Toolkit](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.etools.mft.doc/ax01445_.html).
+  - Launch App Connect Tookit on desktop on Mac, Linux or Windows
+  - Install `Record Distribution` pattern  ![in your workspace](images/cloud_pak_for_integration_workspace.png)
+  - Follow the directions to Record Distribution tutorial.
+  
+  
+
+
 ## Launch the App Connect Dashboard Using IBM Cloud
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
   - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.  ![App Connect Service in Resources](images/app_connect_resource.png)
   - Click on the name of the service
   - Click on `Launch App Connect` button to opn App Connect dashboard in a new tab window  ![Launch App Connect Dashboard](images/app_connect_launch.png) into your cluster  &nbsp;  
 
-## Create an App Connect API for Workday (May not be necessary given using Workday Post method)
+## Create an App Connect API for Workday (BACKUP  given using Workday Post method)
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
   - Click on `APIs`tab ![Add API WSDL](images/appconnect-api.png) &nbsp; 
   - Click on `Add your API or web service now` link to add the Workday API WSDL  
   - You should now be able to expand the Workday API and see available methods.  ![Workday WSDL API](images/app_connect_workday_api.png) &nbsp;  
-
-## Create an Event Driven Flow to Get Workers from Workday  (May not be necessary given using Workday Post method)
+  
+## Create an Event Driven Flow to Get Workers from Workday  (BACKUP  given using Workday Post method)
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
   - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.
 
-## Creating a flow for an API
+## Creating a flow for an API  (BACKUP)
 
 Creating a flow for an API for Workday to post workers into an App Connect HTTP Post Endpoint.  If you want a developer to be able to create an application that uses the data in your cloud-based applications, you can provide an API. To create flows for an API, complete the following steps.
 

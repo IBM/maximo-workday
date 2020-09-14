@@ -6,7 +6,21 @@
       "host": "TBD.com:8080",
       "Worker_Post_URL": "/TBD",
       "Oganization_Post_URL": "/TBD",
-      "Location_Post_URL": "/TBD"
+      "Location_Post_URL": "/TBD",
+
+      App Connect Container ports:
+   - name: mq
+     port: 1414
+     nodePort: 30005
+   - name: mq-metrics
+     port: 9157
+     nodePort: 30006
+   - name: ace-admin
+     port: 7600
+     nodePort: 30007
+   - name: ace-http,
+     port: 7800
+     nodePort: 30008
     },
   "Maximo": {
     "host": "https://52.116.33.175:9443/maximo"
