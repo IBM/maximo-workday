@@ -5,6 +5,7 @@
 -  tutorial https://www.ibm.com/cloud/garage/dte/tutorial/connect-app-integration-message-queue-using-cloud-pak-integration-using-openshift-42
 - Tutorial App Connect on IBM Cloud https://cloud.ibm.com/docs/AppConnect/appconnect.html
 - Parsing XML files into App Connect https://developer.ibm.com/integration/docs/app-connect/toolbox-utilities/toolbox-xml-parser/
+- Knowledge Center Creating API Flows from Scratch Using Designer https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_creatingapiflows.htm
 
 ### IBM Cloud
 - Tutorial https://developer.ibm.com/integration/docs/app-connect/tutorials-for-ibm-app-connect/creating-flows-api/

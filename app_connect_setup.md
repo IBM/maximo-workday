@@ -24,17 +24,6 @@
   - Click "Apply Plan"  ![in your workspace](images/cloud_pak_for_integration_workspace.png)
   - Click "Offering Dashboard" ![IBM Cloud Catalog](images/catalog.png) Accept token exceptions
   - Select Red Hat authentication mechanism for  ![OpenShif Authenticationt ](images/cloud_pak_for_integration_authentication.png]) which will then open the 
-  
-
-# Create an App Connect Record Batch Processing of Workday Resources
-Use App Connect Workspace, Bar File to implement or Record distribution to load xml files for workday resources into Maimo
-  - Install [App Connect Enterprise Toolkit](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.etools.mft.doc/ax01445_.html).
-  - Launch App Connect Tookit on desktop on Mac, Linux or Windows
-  - Install `Record Distribution` pattern  ![in your workspace](images/cloud_pak_for_integration_workspace.png)
-  - Follow the directions to Record Distribution tutorial.
-  
-  
-
 
 ## Launch the App Connect Dashboard Using IBM Cloud
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
@@ -42,7 +31,34 @@ Use App Connect Workspace, Bar File to implement or Record distribution to load 
   - Click on the name of the service
   - Click on `Launch App Connect` button to opn App Connect dashboard in a new tab window  ![Launch App Connect Dashboard](images/app_connect_launch.png) into your cluster  &nbsp;  
 
-## Create an App Connect API for Workday (BACKUP  given using Workday Post method)
+## Configure App Connect Secure Gateway Client
+  - Launch the App Connect Service Dashboard from the IBM Cloud 
+  - From menu choose `Private Networkd Connections` 
+  - Choose `Networks` at top of the page which will open in another tab ![App Connect Networks](images/app_connect_networks.png) &nbsp; 
+  - In new tae click `Connect Network` button.
+  - Select your operating system client and click  `installer` button for your operating system ![App Connect Networks details](images/app_connect_networks_details.png) &nbsp;
+  - It is recommended to increase the size of the `ibm-securegateway-client-1.8.5fp2+client_x86_64-MacOS-10.10.dmg` file by launching the disk utility on your operating system.  On a Mac launch the disk utility.  Open the dmg file you downloaded.  
+  - Enter a `Network name` field and click the `Submit button
+  - Make note of the `Gateway ID` and `Security ID`  you will need them for the next step
+  - In the Terminal Window run the command  `./secgw.command`  On Mac if you get an error message indicating that this software is from an unverified developer, do the following. Go to Mac `Finder` folder where the utility is located hold `control` and select open, 
+  - From the menu select `Images' and `Resize' and choose the `dmg` file and press the `Choose` button
+  - Increase the size of the the file by 100 megabytes.  Click `resize` button.
+  - From the `Finder` window, search for the `ibm-securegateway-client-1.8.5fp2+client_x86_64-MacOS-10.10.dmg` double click to launch the mounted image.
+  - Open a terminal window and type command `cd /Volumes/secure_gateway_client/ibm`
+  - Run the script `./secgw.command`
+  - When asked in the terminal  `Enter the gateway IDs, separated by spaces:`  paste the value.
+  - When asked in the terminal  `Enter the gateway ID security tokens separated by spaces, enter 'none' for no security token:`  paste the value.
+  - When asked in the terminal  `Enter the proxy info if you want to start the client with the proxy:` paste in the proxy or host name or IP for Maximo.  Something like  http://52.116.33.175:9443/maximo
+  - When asked in the terminal  `Enter the additional startup options separated by spaces:` enter blank 
+  - Go to App Connect `Private Networks`  and `Networks` to see the new network connection![App Connect Networks](images/app_connect_setup_networks_connected.png) &nbsp;  
+
+## Create an App Connect Application for Maximo 
+  - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
+  - Click on `Applications`tab ![Add Application](images/app_connect_maximo_catalog_application.png) and `Add Account` option&nbsp; 
+  - Enter your Maximo `Hostname`, `User name`,  `Password` and `Network` name you created in in previous configure App Connect Secure Gateway Client `Add your API or web service now` ![Add Application Details](images/app_connect_maximo_catalog_application_network.png) &nbsp;  
+  - You should now be able to connect message flows to Maximo.
+
+## Create an App Connect API for Workday (BACKUP)
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
   - Click on `APIs`tab ![Add API WSDL](images/appconnect-api.png) &nbsp; 
   - Click on `Add your API or web service now` link to add the Workday API WSDL  
