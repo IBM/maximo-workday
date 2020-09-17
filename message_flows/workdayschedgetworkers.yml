@@ -1,0 +1,170 @@
+$integration: 'http://ibm.com/appconnect/integration/v2/integrationFile'
+integration:
+  type: trigger-action
+  trigger-interfaces:
+    trigger-interface-1:
+      connector-type: streaming-connector-scheduler
+      type: event-trigger
+      triggers:
+        SCHEDULE:
+          input-context:
+            data: scheduler
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          options:
+            subscription:
+              scheduleConfiguration:
+                interval:
+                  unit: minute
+                  value: 5
+                  runOnceOncheck: false
+                  days:
+                    - MON
+                    - TUE
+                    - WED
+                    - THU
+                    - FRI
+                    - SAT
+                    - SUN
+                  timeZone: UTC
+      account-name: Account 1
+  action-interfaces:
+    action-interface-1:
+      type: api-action
+      business-object: Human_Resources___Get_Workers
+      connector-type: workday
+      account-name: Account 1
+      actions:
+        Get_Workers: {}
+    action-interface-2:
+      type: api-action
+      business-object: mxapilabor
+      connector-type: maximo
+      account-name: Account 1
+      actions:
+        UPSERTWITHWHERE: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - custom-action:
+              name: Workday Get Workers
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              action: Get_Workers
+              map:
+                mappings:
+                  - Request_References:
+                      mappings:
+                        - Worker_Reference:
+                            foreach:
+                              mappings:
+                                - ID__NORMALIZED:
+                                    mappings:
+                                      - Employee_ID:
+                                          template: '21001'
+                              input: '[0]'
+                              iterator: Worker_ReferenceItem
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+          - for-each:
+              name: For each
+              assembly:
+                $ref: '#/integration/assemblies/assembly-2'
+              source:
+                expression: '$WorkdayGetWorkers.Response_Data.Worker '
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: WorkdayGetWorkers
+                    $ref: '#/node-output/Workday Get Workers/response/payload'
+              mode: parallel
+              continue-on-error: true
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: IBMMaximoUpdateorcreatelabor
+                    $ref: >-
+                      #/block/For each/node-output/IBM Maximo Update or create
+                      labor/response/payload
+                  - variable: IBMMaximoUpdateorcreatelaborMetadata
+                    $ref: >-
+                      #/block/For each/node-output/IBM Maximo Update or create
+                      labor/response
+                  - variable: WorkdayGetWorkers
+                    $ref: '#/node-output/Workday Get Workers/response/payload'
+                customSchemas:
+                  properties.`output`:
+                    type: object
+                    properties:
+                      First:
+                        type: string
+                      Last:
+                        type: string
+                mappings:
+                  - output:
+                      mappings:
+                        - First:
+                            template: >-
+                              {{$join($WorkdayGetWorkers.Response_Data.Worker.Worker_Data.Personal_Data.Name_Data.Legal_Name_Data.Name_Detail_Data.Local_Name_Detail_Data.First_Name,
+                              ', ')}}
+                        - Last:
+                            template: >-
+                              {{$join($WorkdayGetWorkers.Response_Data.Worker.Worker_Data.Personal_Data.Name_Data.Legal_Name_Data.Name_Detail_Data.Last_Name,
+                              ', ')}}
+              display-name: Worker
+          - logging:
+              name: Log
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: WorkdayGetWorkers
+                    $ref: '#/node-output/Workday Get Workers/response/payload'
+                  - variable: Foreach
+                    $ref: '#/node-output/For each/response/payload'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: >-
+                        Returned from IBM Maximo REST
+                        {{$WorkdayGetWorkers.Response_Data.Worker}}
+    assembly-2:
+      assembly:
+        execute:
+          - upsert-action:
+              name: IBM Maximo Update or create labor
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-2'
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: WorkdayGetWorkers
+                    $ref: '#/node-output/Workday Get Workers/response/payload'
+                mappings: []
+              filter:
+                where:
+                  and:
+                    - laborcode: '{{$Foreachitem.Worker_Reference.ID__NORMALIZED}}'
+                    - orgid: EAGLENA
+                input:
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: WorkdayGetWorkers
+                    $ref: '#/node-output/Workday Get Workers/response/payload'
+  name: workdayschedgetworkers
+models: {}
