@@ -1,54 +1,105 @@
 {
-[ Employees
-  {
-    "SynchFilter"  :
-    {
-      "Geography" :  "United States"
-      "State" : "New York",
-      "Group"  : "Technician",
-      "Search_Start_Date": "2020-09-25:12:25",
-      "Search_End_Date": "2020-09-26:01:45",
-      "Number_Rows" : 25,
-      "State_Last_Synch_Date"  : "None" or "2020-09-25:12:25"
-    }
-  },
-      [Employee
-        {
-          "laborcode": ,
-          "role" : "Master Electrician",
-          "type": "EM",
-          "orgid": "EAGLENA",
-          "worker_id": 21001,
-          "worksite": "BEDFORD",
-          "status": "ACTIVE",
-          "first name" : "John ",
-          "last name" : "Smith ",
-          "email" : "john@tech.com",
-          "phone" : "978-705-3333"
-          },
-        {
-          "laborcode": ,
-          "role" : "Electrician",
-          "type": "EM",
-          "orgid": "EAGLENA",
-          "worker_id": 21001,
-          "worksite": "BEDFORD",
-          "status": "ACTIVE",
-          "first name" : "John ",
-          "last name" : "smith ",
-          "email" : "john@tech.com",
-          "phone" : "401-333-4444"
-          }
-  ]
-        {
-          "laborcode": Get_Workers_Response.Response_Results.Workers_Response_Data.Worker.,
-          "role" : "Electrician",
-          "type": "EM",
-          "orgid": "EAGLENA",
-          "worker_id": 21002,
-          "worksite": "BEDFORD",
-          "status": "ACTIVE"
-        }
-      ]
-  ]
-}
+      "employeeID": 21001,
+      "firstName": "Logan",
+      "lastName": "McNeil",
+      "gender": "Female",
+      "workAddressLine1": "3939 The Embarcadero",
+      "workMunicipality": "San Francisco",
+      "workState": "California",
+      "workPostalCode": "94111",
+      "workCountry": "94111",
+      "workPhone": "415789-8904",
+      "workEmail": "lmcneil@workday.net",
+      "employeeStatus": "Active",
+      "hireDate": "2000-01-01",
+      "rehire": "false",
+      "businessTitle": "Vice President, Human Resources",
+      "scheduledWeeklyHours": 40,
+      "company": "GMS_USA_company",
+      "jobProfile": "22000",
+      "jobFamily": "Executive Management HR-Management",
+      "managementLevel": "4_Vice_President",
+      "businessSiteName": "San Francisco",
+      "businessSite": "San_Francisco_site",
+      "businessSiteAddressLine1": "3939 The Embarcadero",
+      "businessSiteMunicipality": "San Francisco",
+      "businessSiteRegion": "California",
+      "businessSitePostalCode": "94111",
+      "businessSiteCountry": "US",
+      "supervisorID": 21431,
+      "qualifications":       {
+         "compentencyAchievement":          [
+                        {
+               "compentencyName": "B0250",
+               "competencyLevel": ""
+            },
+                        {
+               "compentencyName": "Building_Talent",
+               "competencyLevel": "Advanced"
+            },
+                        {
+               "compentencyName": "Change_Management",
+               "competencyLevel": "Advanced"
+            },
+                        {
+               "compentencyName": "Collaborating_Across_Boundaries",
+               "competencyLevel": "Expert"
+            },
+                        {
+               "compentencyName": "Core_Values",
+               "competencyLevel": "Proficient"
+            },
+                        {
+               "compentencyName": "I0480",
+               "competencyLevel": ""
+            },
+                        {
+               "compentencyName": "L0000",
+               "competencyLevel": ""
+            },
+                        {
+               "compentencyName": "M1010",
+               "competencyLevel": "Advanced"
+            },
+                        {
+               "compentencyName": "Organization",
+               "competencyLevel": "Advanced"
+            }
+         ],
+         "certificationAchievement":          [
+                        {
+               "certificationName": "Global Professional in Human Resources (GPHR)",
+               "certificationIssuer": "HR Certification Institute",
+               "expirationDate": "2019-07-15"
+            },
+                        {
+               "certificationName": "Certified Payroll Professional (CPP)",
+               "certificationIssuer": "American Payroll Association",
+               "expirationDate": "2019-05-15"
+            }
+         ],
+         "training": [         {
+            "trainingName": "HR Fundamentals",
+            "trainingType": "Web-based",
+            "completionDate": "2007-04-30"
+         }],
+         "education":          [
+                        {
+               "institutionName": "California University",
+               "institutionLocation": "San Francisco",
+               "instituitionCountry": "",
+               "degree": "MBA",
+               "fieldOfStudy": "300.4",
+               "highestLevelofEducation": "true"
+            },
+                        {
+               "institutionName": "Georgetown University",
+               "institutionLocation": "District of Columbia, United States of America",
+               "instituitionCountry": "US",
+               "degree": "BS",
+               "fieldOfStudy": "ART_HISTORY",
+               "highestLevelofEducation": "false"
+            }
+         ]
+      }
+   }
