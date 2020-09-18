@@ -1,0 +1,341 @@
+{
+  "$attributes": {
+    "version": "v32.1"
+  },
+  "Request_References": {
+    "Worker_Reference": {
+      "ID__NORMALIZED": {
+        "WID": "3aa5550b7fe348b98d7b5741afc65534",
+        "Employee_ID": "21001"
+      }
+    }
+  },
+  "Response_Results": {
+    "Total_Results": "1",
+    "Total_Pages": "1",
+    "Page_Results": "1",
+    "Page": "1"
+  },
+  "Response_Data": {
+    "Worker": {
+      "Worker_Reference": {
+        "ID__NORMALIZED": {
+          "WID": "3aa5550b7fe348b98d7b5741afc65534",
+          "Employee_ID": "21001"
+        }
+      },
+      "Worker_Descriptor": "Logan McNeil",
+      "Worker_Data": {
+        "Worker_ID": "21001",
+        "User_ID": "lmcneil",
+        "Personal_Data": {
+          "Name_Data": {
+            "Legal_Name_Data": {
+              "Name_Detail_Data": {
+                "$attributes": {
+                  "Formatted_Name": "Logan McNeil",
+                  "Reporting_Name": "McNeil, Logan"
+                },
+                "Country_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "bc33aa3152ec42d4995f4791a106ed09",
+                    "ISO_3166-1_Alpha-2_Code": "US",
+                    "ISO_3166-1_Alpha-3_Code": "USA",
+                    "ISO_3166-1_Numeric-3_Code": "840"
+                  }
+                },
+                "First_Name": "Logan",
+                "Last_Name": "McNeil"
+              }
+            },
+            "Preferred_Name_Data": {
+              "Name_Detail_Data": {
+                "$attributes": {
+                  "Formatted_Name": "Logan McNeil",
+                  "Reporting_Name": "McNeil, Logan"
+                },
+                "Country_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "bc33aa3152ec42d4995f4791a106ed09",
+                    "ISO_3166-1_Alpha-2_Code": "US",
+                    "ISO_3166-1_Alpha-3_Code": "USA",
+                    "ISO_3166-1_Numeric-3_Code": "840"
+                  }
+                },
+                "First_Name": "Logan",
+                "Last_Name": "McNeil"
+              }
+            }
+          },
+          "Contact_Data": {
+            "Address_Data": [
+              {
+                "$attributes": {
+                  "Effective_Date": "2008-03-25T00:00:00.000Z",
+                  "Address_Format_Type": "Basic",
+                  "Formatted_Address": "42 Laurel Street&#xa;San Francisco, CA 94118&#xa;United States of America",
+                  "Defaulted_Business_Site_Address": "0"
+                },
+                "Country_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "bc33aa3152ec42d4995f4791a106ed09",
+                    "ISO_3166-1_Alpha-2_Code": "US",
+                    "ISO_3166-1_Alpha-3_Code": "USA",
+                    "ISO_3166-1_Numeric-3_Code": "840"
+                  }
+                },
+                "Last_Modified": "2008-08-04T02:10:13.007Z",
+                "Address_Line_Data": {
+                  "$attributes": {
+                    "Type": "ADDRESS_LINE_1",
+                    "Descriptor": "Address Line 1"
+                  },
+                  "$value": "42 Laurel Street"
+                },
+                "Municipality": "San Francisco",
+                "Country_Region_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "ec3d210e4240442e99a28fa70419aec5",
+                    "Country_Region_ID": "USA-CA",
+                    "ISO_3166-2_Code": "CA"
+                  }
+                },
+                "Country_Region_Descriptor": "California",
+                "Postal_Code": "94118",
+                "Usage_Data": {
+                  "$attributes": {
+                    "Public": "0"
+                  },
+                  "Type_Data": {
+                    "$attributes": {
+                      "Primary": "1"
+                    },
+                    "Type_Reference": {
+                      "ID__NORMALIZED": {
+                        "WID": "836cf00ef5974ac08b786079866c946f",
+                        "Communication_Usage_Type_ID": "HOME"
+                      }
+                    }
+                  }
+                },
+                "Number_of_Days": "0",
+                "Address_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "91d468fd9c3b465f86ed1362f06b3c5b",
+                    "Address_ID": "ADDRESS_REFERENCE-4-1"
+                  }
+                },
+                "Address_ID": "ADDRESS_REFERENCE-4-1"
+              },
+              {
+                "$attributes": {
+                  "Effective_Date": "2000-01-01T00:00:00.000Z",
+                  "Address_Format_Type": "Basic",
+                  "Formatted_Address": "3939 The Embarcadero&#xa;San Francisco, CA 94111&#xa;United States of America",
+                  "Defaulted_Business_Site_Address": "1"
+                },
+                "Country_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "bc33aa3152ec42d4995f4791a106ed09",
+                    "ISO_3166-1_Alpha-2_Code": "US",
+                    "ISO_3166-1_Alpha-3_Code": "USA",
+                    "ISO_3166-1_Numeric-3_Code": "840"
+                  }
+                },
+                "Last_Modified": "2011-06-20T20:54:02.023Z",
+                "Address_Line_Data": {
+                  "$attributes": {
+                    "Type": "ADDRESS_LINE_1",
+                    "Descriptor": "Address Line 1"
+                  },
+                  "$value": "3939 The Embarcadero"
+                },
+                "Municipality": "San Francisco",
+                "Country_Region_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "ec3d210e4240442e99a28fa70419aec5",
+                    "Country_Region_ID": "USA-CA",
+                    "ISO_3166-2_Code": "CA"
+                  }
+                },
+                "Country_Region_Descriptor": "California",
+                "Postal_Code": "94111",
+                "Usage_Data": {
+                  "$attributes": {
+                    "Public": "1"
+                  },
+                  "Type_Data": {
+                    "$attributes": {
+                      "Primary": "1"
+                    },
+                    "Type_Reference": {
+                      "ID__NORMALIZED": {
+                        "WID": "1f27f250dfaa4724ab1e1617174281e4",
+                        "Communication_Usage_Type_ID": "WORK"
+                      }
+                    }
+                  }
+                },
+                "Number_of_Days": "0",
+                "Address_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "d77b39b882ec495daed85c9f94876283",
+                    "Address_ID": "ADDRESS_REFERENCE-4-640"
+                  }
+                },
+                "Address_ID": "ADDRESS_REFERENCE-4-640"
+              }
+            ],
+            "Phone_Data": [
+              {
+                "$attributes": {
+                  "Area_Code": "415",
+                  "Phone_Number_Without_Area_Code": "441-7842",
+                  "E164_Formatted_Phone": "+14154417842",
+                  "Workday_Traditional_Formatted_Phone": "+1 (415) 441-7842",
+                  "National_Formatted_Phone": "(415) 441-7842",
+                  "International_Formatted_Phone": "+1 415-441-7842",
+                  "Tenant_Formatted_Phone": "+1 415-441-7842"
+                },
+                "Country_ISO_Code": "USA",
+                "International_Phone_Code": "1",
+                "Phone_Number": "415441-7842",
+                "Phone_Device_Type_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "3014da0ed66f41a3b88085b19175300e",
+                    "Phone_Device_Type_ID": "Landline"
+                  }
+                },
+                "Usage_Data": {
+                  "$attributes": {
+                    "Public": "1"
+                  },
+                  "Type_Data": {
+                    "$attributes": {
+                      "Primary": "1"
+                    },
+                    "Type_Reference": {
+                      "ID__NORMALIZED": {
+                        "WID": "836cf00ef5974ac08b786079866c946f",
+                        "Communication_Usage_Type_ID": "HOME"
+                      }
+                    }
+                  }
+                },
+                "Phone_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "1fded0073861010a8e2bd982677b3600",
+                    "Phone_ID": "PHONE_REFERENCE-16-4"
+                  }
+                },
+                "ID": "PHONE_REFERENCE-16-4"
+              },
+              {
+                "$attributes": {
+                  "Area_Code": "415",
+                  "Phone_Number_Without_Area_Code": "789-8904",
+                  "E164_Formatted_Phone": "+14157898904",
+                  "Workday_Traditional_Formatted_Phone": "+1 (415) 789-8904",
+                  "National_Formatted_Phone": "(415) 789-8904",
+                  "International_Formatted_Phone": "+1 415-789-8904",
+                  "Tenant_Formatted_Phone": "+1 415-789-8904"
+                },
+                "Country_ISO_Code": "USA",
+                "International_Phone_Code": "1",
+                "Phone_Number": "415789-8904",
+                "Phone_Device_Type_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "d691375437c848aea9d5b0874353bfd7",
+                    "Phone_Device_Type_ID": "Mobile"
+                  }
+                },
+                "Usage_Data": {
+                  "$attributes": {
+                    "Public": "1"
+                  },
+                  "Type_Data": {
+                    "$attributes": {
+                      "Primary": "1"
+                    },
+                    "Type_Reference": {
+                      "ID__NORMALIZED": {
+                        "WID": "1f27f250dfaa4724ab1e1617174281e4",
+                        "Communication_Usage_Type_ID": "WORK"
+                      }
+                    }
+                  }
+                },
+                "Phone_Reference": {
+                  "ID__NORMALIZED": {
+                    "WID": "1fded0073861014f5bbe4784677b3703",
+                    "Phone_ID": "PHONE_REFERENCE-16-773"
+                  }
+                },
+                "ID": "PHONE_REFERENCE-16-773"
+              }
+            ],
+            "Email_Address_Data": {
+              "Email_Address": "lmcneil@workday.net",
+              "Usage_Data": {
+                "$attributes": {
+                  "Public": "1"
+                },
+                "Type_Data": {
+                  "$attributes": {
+                    "Primary": "1"
+                  },
+                  "Type_Reference": {
+                    "ID__NORMALIZED": {
+                      "WID": "1f27f250dfaa4724ab1e1617174281e4",
+                      "Communication_Usage_Type_ID": "WORK"
+                    }
+                  }
+                }
+              },
+              "Email_Reference": {
+                "ID__NORMALIZED": {
+                  "WID": "52afc8db100f0147541ac63e85431a00",
+                  "Email_ID": "EMAIL_REFERENCE-16-4"
+                }
+              },
+              "ID": "EMAIL_REFERENCE-16-4"
+            },
+            "Instant_Messenger_Data": {
+              "Instant_Messenger_Address": "lmcneil",
+              "Instant_Messenger_Type_Reference": {
+                "ID__NORMALIZED": {
+                  "WID": "8cdd85db9d174b2685ffbe4d6e02ac99",
+                  "Instant_Messenger_Type_ID": "248.5"
+                }
+              },
+              "Usage_Data": {
+                "$attributes": {
+                  "Public": "1"
+                },
+                "Type_Data": {
+                  "$attributes": {
+                    "Primary": "1"
+                  },
+                  "Type_Reference": {
+                    "ID__NORMALIZED": {
+                      "WID": "836cf00ef5974ac08b786079866c946f",
+                      "Communication_Usage_Type_ID": "HOME"
+                    }
+                  }
+                }
+              },
+              "Instant_Messenger_Reference": {
+                "ID__NORMALIZED": {
+                  "WID": "655c4c72e3df011317490df03801b200",
+                  "Instant_Messenger_ID": "INSTANT_MESSENGER_REFERENCE-16-1"
+                }
+              },
+              "ID": "INSTANT_MESSENGER_REFERENCE-16-1"
+            }
+          },
+          "Tobacco_Use": false
+        }
+      }
+    }
+  }
+}
