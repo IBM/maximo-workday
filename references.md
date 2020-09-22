@@ -6,6 +6,8 @@
 - Tutorial App Connect on IBM Cloud https://cloud.ibm.com/docs/AppConnect/appconnect.html
 - Parsing XML files into App Connect https://developer.ibm.com/integration/docs/app-connect/toolbox-utilities/toolbox-xml-parser/
 - Knowledge Center Creating API Flows from Scratch Using Designer https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_creatingapiflows.htm
+- Calling a REST API using HTTP Invoke Method https://www.ibm.com/support/knowledgecenter/SS6KM6/com.ibm.appconnect.dev.doc/tutorials/json-parser-convert-response-http-call-subsequent-use-flow.html
+- Tutorial How to Use App Connect to call Soap Services https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-soap/#soap_connect-app
 
 ### IBM Cloud
 - Tutorial https://developer.ibm.com/integration/docs/app-connect/tutorials-for-ibm-app-connect/creating-flows-api/
