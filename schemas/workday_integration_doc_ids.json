@@ -1,0 +1,155 @@
+{
+	"Integration_Event": {
+		"Integration_Event_Reference": {
+			"ID__NORMALIZED": {
+				"WID": "9730c01e758601e4467fa9ac2922c309",
+				"Background_Process_Instance_ID": "INTEGRATION_ESB_INVOCATION-6-19958"
+			}
+		},
+		"Integration_Event_Data": {
+			"Integration_System_Reference": {
+				"ID__NORMALIZED": {
+					"WID": "d390457a170a017b4e0fccb25121a708",
+					"Integration_System_ID": "INT_STD_MaximoPersonSyncCollection/INT_STD_MaximoPersonSync/StartHere"
+				}
+			},
+			"Process_Description": "INT_STD_MaximoPersonSync",
+			"Initiated_DateTime": "2020-09-18T11:02:34.094Z",
+			"Integration_Response_Message": "Integration Completed.",
+			"Completed_DateTime": "2020-09-18T11:02:41.453Z",
+			"Initiated_By_System_Account_Reference": {
+				"ID__NORMALIZED": {
+					"WID": "3ebe69275f2a41979f43a04d5a61cab3",
+					"System_User_ID": "lmcneil",
+					"WorkdayUserName": "lmcneil"
+				}
+			},
+			"Percent_Complete": "1",
+			"Integration_Runtime_Parameter_Data": {
+				"Launch_Configurable_Name": "INT_STD_MaximoPersonSyncCollection/INT_STD_MaximoPersonSync/StartHere",
+				"Parameter_Name": {
+					"$attributes": {
+						"Label": "Integration Event"
+					},
+					"$value": "Text"
+				}
+			}
+		},
+		"Background_Process_Instance_Data": {
+			"Background_Process_Instance_Status_Reference": {
+				"ID__NORMALIZED": {
+					"WID": "d8b0bcd8446c11de98360015c5e6daf6",
+					"Background_Process_Instance_Status_ID": "Completed"
+				}
+			},
+			"Parent_Event_Reference": {
+				"ID": {
+					"$attributes": {
+						"type": "WID"
+					},
+					"$value": "9730c01e7586015d088f79ac2922bc09"
+				}
+			},
+			"Background_Process_Message_Data": [{
+				"Timestamp": "2020-09-18T11:02:40.071Z",
+				"Severity_Level_Reference": {
+					"ID__NORMALIZED": {
+						"WID": "dc0f8382446c11de98360015c5e6daf6",
+						"Message_Severity_Level": "INFO"
+					}
+				},
+				"Message_Summary": "Log File.htm"
+			}, {
+				"Timestamp": "2020-09-18T11:02:40.349Z",
+				"Severity_Level_Reference": {
+					"ID__NORMALIZED": {
+						"WID": "dc0f8382446c11de98360015c5e6daf6",
+						"Message_Severity_Level": "INFO"
+					}
+				},
+				"Message_Summary": "Worker.json"
+			}],
+			"Output_Document_Data": [{
+				"Integration_Repository_Document_Reference": {
+					"ID__NORMALIZED": {
+						"WID": "9730c01e7586010939b9edad2922c709",
+						"Document_ID": "cloud/7051204a-1e07-4739-3c49-7967185b7d10"
+					}
+				},
+				"Integration_Repository_Document_Data": {
+					"$attributes": {
+						"Document_ID": "cloud/7051204a-1e07-4739-3c49-7967185b7d10",
+						"File_Name": "Worker.json"
+					},
+					"File_Size": "836695",
+					"Content_Type_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "d969a07a5d4410000f3d5750e4dd001c",
+							"Content_Type_ID": "application/json"
+						}
+					},
+					"Document_Type_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "dc72b65a446c11de98360015c5e6daf6",
+							"Document_Type_ID": "TXT"
+						}
+					},
+					"Expiration_Timestamp": "2020-09-25T11:02:40.000Z",
+					"Owner_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "3ebe69275f2a41979f43a04d5a61cab3",
+							"System_User_ID": "lmcneil",
+							"WorkdayUserName": "lmcneil"
+						}
+					},
+					"Document_Tag_Reference": [{
+						"ID__NORMALIZED": {
+							"WID": "df3520a3ef69432bbd9f48ed808dbd18",
+							"Workday_Document_Tag_Name": "Deliverable"
+						}
+					}, {
+						"ID__NORMALIZED": {
+							"WID": "9730c01e758601f534187bc3ea21e308",
+							"Document_Tag_Name": "Person"
+						}
+					}],
+					"Custom_Document_Tag": "Person"
+				}
+			}, {
+				"Integration_Repository_Document_Reference": {
+					"ID__NORMALIZED": {
+						"WID": "9730c01e7586016c49dbddad2922c509",
+						"Document_ID": "cloud/09181c37-4e3f-4606-1031-7c1e064a3455"
+					}
+				},
+				"Integration_Repository_Document_Data": {
+					"$attributes": {
+						"Document_ID": "cloud/09181c37-4e3f-4606-1031-7c1e064a3455",
+						"File_Name": "Log File.htm"
+					},
+					"File_Size": "17639",
+					"Content_Type_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "d9ae66b2446c11de98360015c5e6daf6",
+							"Content_Type_ID": "text/html"
+						}
+					},
+					"Document_Type_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "dc72b826446c11de98360015c5e6daf6",
+							"Document_Type_ID": "HTML"
+						}
+					},
+					"Expiration_Timestamp": "2020-09-25T11:02:39.000Z",
+					"Owner_Reference": {
+						"ID__NORMALIZED": {
+							"WID": "3ebe69275f2a41979f43a04d5a61cab3",
+							"System_User_ID": "lmcneil",
+							"WorkdayUserName": "lmcneil"
+						}
+					}
+				}
+			}]
+		}
+	}
+}
