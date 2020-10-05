@@ -5,3 +5,6 @@
      - MXAPICRAFT
      - MXAPIPERUSER
      - MXAPILABOR
+- Increase the lengths of
+    - SKILLEVEL Domain to 30
+    - CRAFT attribute on the CRAFT object to 30
