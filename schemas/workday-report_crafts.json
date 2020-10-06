@@ -1,0 +1,108 @@
+{
+	"Report_Entry": [{
+		"job_profile_name": "Maintenance Technician",
+		"job_profile_id": "38430"
+	}, {
+		"job_profile_name": "Overhead Line Maintenance",
+		"job_profile_id": "10"
+	}, {
+		"job_profile_name": "Rig Supervisor",
+		"job_profile_id": "(CP) EXP-5RIG"
+	}, {
+		"job_profile_name": "Derrickman",
+		"job_profile_id": "(CP) PRO-6DER"
+	}, {
+		"job_profile_name": "Drilling Technician",
+		"job_profile_id": "(CP) 103"
+	}, {
+		"job_profile_name": "Drilling Engineer (Exploration)",
+		"job_profile_id": "(CP)EXP-4DRE"
+	}, {
+		"job_profile_name": "Drilling Operations Location Manager",
+		"job_profile_id": "(CP) 120"
+	}, {
+		"job_profile_name": "Electrician",
+		"job_profile_id": "CP-201"
+	}, {
+		"job_profile_name": "Roughneck",
+		"job_profile_id": "(CP) EXP-6RGH"
+	}, {
+		"job_profile_name": "Oilwell Pumper",
+		"job_profile_id": "(CP) 126"
+	}, {
+		"job_profile_name": "Electrician",
+		"job_profile_id": "4"
+	}, {
+		"job_profile_name": "Construction Worker",
+		"job_profile_id": "2"
+	}, {
+		"job_profile_name": "Driver",
+		"job_profile_id": "3"
+	}, {
+		"job_profile_name": "Inspector",
+		"job_profile_id": "OPS-5INSP"
+	}, {
+		"job_profile_name": "Lubricator",
+		"job_profile_id": "7"
+	}, {
+		"job_profile_name": "Machinist",
+		"job_profile_id": "8"
+	}, {
+		"job_profile_name": "Supervisor",
+		"job_profile_id": "12"
+	}, {
+		"job_profile_name": "Carpenter",
+		"job_profile_id": "1"
+	}, {
+		"job_profile_name": "Aircraft Mechanic",
+		"job_profile_id": "21"
+	}, {
+		"job_profile_name": "Mechanic",
+		"job_profile_id": "22"
+	}, {
+		"job_profile_name": "Network Technician",
+		"job_profile_id": "27"
+	}, {
+		"job_profile_name": "Email Technician",
+		"job_profile_id": "28"
+	}, {
+		"job_profile_name": "Hardware Technician",
+		"job_profile_id": "29"
+	}, {
+		"job_profile_name": "Operating System Support",
+		"job_profile_id": "30"
+	}, {
+		"job_profile_name": "ERP Application Support",
+		"job_profile_id": "31"
+	}, {
+		"job_profile_name": "Office Application Support",
+		"job_profile_id": "32"
+	}, {
+		"job_profile_name": "Tier 1 Service Desk Agent",
+		"job_profile_id": "33"
+	}, {
+		"job_profile_name": "Tier 2 Service Desk Agent",
+		"job_profile_id": "34"
+	}, {
+		"job_profile_name": "Facility Security",
+		"job_profile_id": "35"
+	}, {
+		"job_profile_name": "Facility Custodial",
+		"job_profile_id": "36"
+	}, {
+		"job_profile_name": "Meeting Co-ordinator",
+		"job_profile_id": "37"
+	}, {
+		"job_profile_name": "Catering",
+		"job_profile_id": "39"
+	}, {
+		"job_profile_name": "IT Tech - Shipping Department",
+		"job_profile_id": "40"
+	}, {
+		"job_profile_name": "Mechanic - Shipping",
+		"job_profile_id": "41"
+	}, {
+		"job_profile_name": "Millwright",
+		"job_profile_id": "42"
+	}]
+}
