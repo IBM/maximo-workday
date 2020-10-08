@@ -1,0 +1,462 @@
+$integration: 'http://ibm.com/appconnect/integration/v2/integrationFile'
+integration:
+  type: trigger-action
+  trigger-interfaces:
+    trigger-interface-1:
+      connector-type: streaming-connector-scheduler
+      type: event-trigger
+      triggers:
+        SCHEDULE:
+          input-context:
+            data: scheduler
+          assembly:
+            $ref: '#/integration/assemblies/assembly-1'
+          options:
+            subscription:
+              scheduleConfiguration:
+                interval:
+                  unit: minute
+                  value: 5
+                  runOnceOncheck: true
+                  days:
+                    - MON
+                    - TUE
+                    - WED
+                    - THU
+                    - FRI
+                    - SAT
+                    - SUN
+                  timeZone: UTC
+      account-name: Account 1
+  action-interfaces:
+    action-interface-2:
+      type: api-action
+      business-object: request
+      connector-type: http
+      account-name: Account 2
+      actions:
+        INVOKE: {}
+    action-interface-3:
+      type: api-action
+      business-object: mxapicraft
+      connector-type: maximo
+      account-name: Account 2
+      actions:
+        UPSERTWITHWHERE: {}
+    action-interface-1:
+      type: api-action
+      business-object: request
+      connector-type: http
+      account-name: Account 2
+      actions:
+        INVOKE: {}
+  assemblies:
+    assembly-1:
+      assembly:
+        execute:
+          - custom-action:
+              name: HTTP Invoke method
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-2'
+              action: INVOKE
+              map:
+                mappings:
+                  - method:
+                      template: GET
+                  - url:
+                      template: >-
+                        https://wd2-impl-services1.workday.com/ccx/service/customreport2/ibmsrv_dpt5/lmcneil/RPT_INT_Maximo_Skills?format=json
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+          - logging:
+              name: Log 6
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: >-
+                        Log Done calling Workday for
+                        RPT_INT_Maximo_Skills{{$HTTPInvokemethod.responseBody}}
+          - parse:
+              name: JSON Parser Parse
+              parse-format: json
+              source:
+                template: '{{$HTTPInvokemethod.responseBody}}'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+              sample-data: |-
+                {
+                "Report_Entry": [{"Skill": "Electrician Apprentice"},
+                {"Skill": "Electrician - 1st Class"},
+                {"Skill": "Electrician - 2nd Class"},
+                {"Skill": "1st Class Construction Worker"},
+                {"Skill": "Driver - Class 1"},
+                {"Skill": "Inspector"},
+                {"Skill": "Lubricator Apprentice"},
+                {"Skill": "Lubricator - 1st Class"},
+                {"Skill": "Machinist Apprentice"},
+                {"Skill": "Machinist 1st Class"},
+                {"Skill": "Machinist 2nd Class"},
+                {"Skill": "Machinist 3rd Class"},
+                {"Skill": "Overhead Line Maintenance"},
+                {"Skill": "Pipefitter"},
+                {"Skill": "Supervisor"},
+                {"Skill": "Apprentice Welder"},
+                {"Skill": "Journeyman Welder"},
+                {"Skill": "Apprentice Carpenter"},
+                {"Skill": "1st Class Carpenter"},
+                {"Skill": "2nd Class Carpenter"},
+                {"Skill": "Aircraft Mechanic"},
+                {"Skill": "Mechanic Apprentice"},
+                {"Skill": "Mechanic 1st Class"},
+                {"Skill": "Mechanic 2nd Class"},
+                {"Skill": "Millwright"}]
+                }
+              output-schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                type: object
+                properties:
+                  Report_Entry:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Skill:
+                          type: string
+                title: Parsed JSON
+          - custom-action:
+              name: HTTP Invoke method 2
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-1'
+              action: INVOKE
+              map:
+                mappings:
+                  - method:
+                      template: GET
+                  - url:
+                      template: >-
+                        https://wd2-impl-services1.workday.com/ccx/service/customreport2/ibmsrv_dpt5/lmcneil/RPT_INT_Maximo_Crafts?format=json
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+          - logging:
+              name: Log
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: >-
+                        Log Done calling RPT_INT_Maximo_Crafts  Get Craft HTTP
+                        report{{$HTTPInvokemethod2.responseBody}}
+                customSchemas: {}
+          - parse:
+              name: JSON Parser Parse 2
+              parse-format: json
+              source:
+                template: '{{$HTTPInvokemethod2.responseBody}}'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+              sample-data: "{\n\t\"Report_Entry\": [{\n\t\t\"job_profile_name\": \"Maintenance Technician\",\n\t\t\"job_profile_id\": \"38430\"\n\t}, {\n\t\t\"job_profile_name\": \"Overhead Line Maintenance\",\n\t\t\"job_profile_id\": \"10\"\n\t}, {\n\t\t\"job_profile_name\": \"Rig Supervisor\",\n\t\t\"job_profile_id\": \"(CP) EXP-5RIG\"\n\t}, {\n\t\t\"job_profile_name\": \"Derrickman\",\n\t\t\"job_profile_id\": \"(CP) PRO-6DER\"\n\t}, {\n\t\t\"job_profile_name\": \"Drilling Technician\",\n\t\t\"job_profile_id\": \"(CP) 103\"\n\t}, {\n\t\t\"job_profile_name\": \"Drilling Engineer (Exploration)\",\n\t\t\"job_profile_id\": \"(CP)EXP-4DRE\"\n\t}, {\n\t\t\"job_profile_name\": \"Drilling Operations Location Manager\",\n\t\t\"job_profile_id\": \"(CP) 120\"\n\t}, {\n\t\t\"job_profile_name\": \"Electrician\",\n\t\t\"job_profile_id\": \"CP-201\"\n\t}, {\n\t\t\"job_profile_name\": \"Roughneck\",\n\t\t\"job_profile_id\": \"(CP) EXP-6RGH\"\n\t}, {\n\t\t\"job_profile_name\": \"Oilwell Pumper\",\n\t\t\"job_profile_id\": \"(CP) 126\"\n\t}, {\n\t\t\"job_profile_name\": \"Electrician\",\n\t\t\"job_profile_id\": \"4\"\n\t}, {\n\t\t\"job_profile_name\": \"Construction Worker\",\n\t\t\"job_profile_id\": \"2\"\n\t}, {\n\t\t\"job_profile_name\": \"Driver\",\n\t\t\"job_profile_id\": \"3\"\n\t}, {\n\t\t\"job_profile_name\": \"Inspector\",\n\t\t\"job_profile_id\": \"OPS-5INSP\"\n\t}, {\n\t\t\"job_profile_name\": \"Lubricator\",\n\t\t\"job_profile_id\": \"7\"\n\t}, {\n\t\t\"job_profile_name\": \"Machinist\",\n\t\t\"job_profile_id\": \"8\"\n\t}, {\n\t\t\"job_profile_name\": \"Supervisor\",\n\t\t\"job_profile_id\": \"12\"\n\t}, {\n\t\t\"job_profile_name\": \"Carpenter\",\n\t\t\"job_profile_id\": \"1\"\n\t}, {\n\t\t\"job_profile_name\": \"Aircraft Mechanic\",\n\t\t\"job_profile_id\": \"21\"\n\t}, {\n\t\t\"job_profile_name\": \"Mechanic\",\n\t\t\"job_profile_id\": \"22\"\n\t}, {\n\t\t\"job_profile_name\": \"Network Technician\",\n\t\t\"job_profile_id\": \"27\"\n\t}, {\n\t\t\"job_profile_name\": \"Email Technician\",\n\t\t\"job_profile_id\": \"28\"\n\t}, {\n\t\t\"job_profile_name\": \"Hardware Technician\",\n\t\t\"job_profile_id\": \"29\"\n\t}, {\n\t\t\"job_profile_name\": \"Operating System Support\",\n\t\t\"job_profile_id\": \"30\"\n\t}, {\n\t\t\"job_profile_name\": \"ERP Application Support\",\n\t\t\"job_profile_id\": \"31\"\n\t}, {\n\t\t\"job_profile_name\": \"Office Application Support\",\n\t\t\"job_profile_id\": \"32\"\n\t}, {\n\t\t\"job_profile_name\": \"Tier 1 Service Desk Agent\",\n\t\t\"job_profile_id\": \"33\"\n\t}, {\n\t\t\"job_profile_name\": \"Tier 2 Service Desk Agent\",\n\t\t\"job_profile_id\": \"34\"\n\t}, {\n\t\t\"job_profile_name\": \"Facility Security\",\n\t\t\"job_profile_id\": \"35\"\n\t}, {\n\t\t\"job_profile_name\": \"Facility Custodial\",\n\t\t\"job_profile_id\": \"36\"\n\t}, {\n\t\t\"job_profile_name\": \"Meeting Co-ordinator\",\n\t\t\"job_profile_id\": \"37\"\n\t}, {\n\t\t\"job_profile_name\": \"Catering\",\n\t\t\"job_profile_id\": \"39\"\n\t}, {\n\t\t\"job_profile_name\": \"IT Tech - Shipping Department\",\n\t\t\"job_profile_id\": \"40\"\n\t}, {\n\t\t\"job_profile_name\": \"Mechanic - Shipping\",\n\t\t\"job_profile_id\": \"41\"\n\t}, {\n\t\t\"job_profile_name\": \"Millwright\",\n\t\t\"job_profile_id\": \"42\"\n\t}]\n}"
+              output-schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                type: object
+                properties:
+                  Report_Entry:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        job_profile_name:
+                          type: string
+                        job_profile_id:
+                          type: string
+                title: Parsed JSON
+          - logging:
+              name: Log 5
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: Log 5 Done Creating Domain
+          - for-each:
+              name: For each 2
+              assembly:
+                $ref: '#/integration/assemblies/assembly-3'
+              source:
+                expression: '$JSONParserParse2.Report_Entry '
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
+              mode: sequential
+              continue-on-error: true
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: IBMMaximoUpdateorcreatecraft
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      craft/response/payload
+                  - variable: IBMMaximoUpdateorcreatecraftMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      craft/response
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
+                customSchemas:
+                  properties.`output`:
+                    type: object
+                    properties:
+                      SkillDataName:
+                        type: string
+                mappings:
+                  - output:
+                      mappings:
+                        - SkillDataName:
+                            template: '{{$Foreach2item.Skill}}'
+              display-name: Report Entry
+          - logging:
+              name: Log 3
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: Foreach2
+                    $ref: '#/node-output/For each 2/response/payload'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: Done adding crafts and skills
+    assembly-3:
+      assembly:
+        execute:
+          - logging:
+              name: Log 2
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: >-
+                        Log 2 Craft Profile Name
+                        {{$Foreach2item.job_profile_name}}{{$Foreach2item.job_profile_id}}
+                customSchemas: {}
+          - upsert-action:
+              name: IBM Maximo Update or create craft
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-3'
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                mappings: []
+              filter:
+                where:
+                  and:
+                    - craft: '{{$Foreach2item.job_profile_name}}'
+                    - orgid: EAGLENA
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+          - logging:
+              name: Log 4
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: IBMMaximoUpdateorcreatecraft
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      craft/response/payload
+                  - variable: IBMMaximoUpdateorcreatecraftMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      craft/response
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: HTTPInvokemethod2
+                    $ref: '#/node-output/HTTP Invoke method 2/response/payload'
+                  - variable: HTTPInvokemethod2Metadata
+                    $ref: '#/node-output/HTTP Invoke method 2/response'
+                  - variable: JSONParserParse2
+                    $ref: '#/node-output/JSON Parser Parse 2/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: Done Calling Maximo Create Update Craft
+  name: maximo_workday_intial_setup_crafts
+models: {}
