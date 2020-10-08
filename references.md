@@ -11,18 +11,14 @@
 - Using Jsonata reference https://docs.jsonata.org/simple 
 - Try Jsonate https://try.jsonata.org/
 - Maximo Connector Setup https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-ibm-maximo/
-
-
-### IBM Cloud
 - Tutorial https://developer.ibm.com/integration/docs/app-connect/tutorials-for-ibm-app-connect/creating-flows-api/
-- Knowledge Center -
+- How to use Soap connector https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-soap/
 
-##  Maximo
+##  Maximo Enterprise Asset Management
 - Maximo REST API Reference https://developer.ibm.com/static/site-id/155/maximodev/restguide/Maximo_Nextgen_REST_API.html
 - Maximo Connector in App Connect https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-ibm-maximo/
 
 ##  Workday
-- https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-soap/
 - Workday Studio Home [https://community.workday.com/studio]
 - How to Download Studio 
 - Workday Studio Documentation [https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/u54Qfquy66UYjfvy7grLvQ]
