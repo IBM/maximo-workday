@@ -19,9 +19,9 @@
 - Maximo Connector in App Connect https://developer.ibm.com/integration/docs/app-connect/how-to-guides-for-apps/use-ibm-app-connect-ibm-maximo/
 
 ##  Workday
-- Workday Studio Home [https://community.workday.com/studio]
-- How to Download Studio 
-- Workday Studio Documentation [https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/u54Qfquy66UYjfvy7grLvQ]
+- [Workday Studio Home](https://community.workday.com/studio)
+- [How to Download Studio](https://community.workday.com/studio-download) 
+- [Workday Studio Documentation](https://doc.workday.com/reader/J1YvI9CYZUWl1U7_PSHyHA/u54Qfquy66UYjfvy7grLvQ)
 
 ## Cloud Pak For Integration
 - Tutorial to integrate Message Queues https://www.ibm.com/cloud/garage/dte/tutorial/connect-app-integration-message-queue-using-cloud-pak-integration-using-openshift-42
