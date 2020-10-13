@@ -2,9 +2,9 @@
 
 ## Steps
 
-1. [Create Report Maximo Skills](#create-report-maximo-skills)
-2. [Create Report Maximo Crafts](#create-report-maximo-crafts)
-3. [Configure Scheduled Integration - Maximo Person Sync](#configure-scheduled-integration---maximo-person-sync)
+1. [Create Report Maximo Skills](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#create-report-maximo-skills)
+2. [Create Report Maximo Crafts](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#create-report-maximo-crafts)
+3. [Configure Scheduled Integration - Maximo Person Sync](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#configure-scheduled-integration---maximo-person-sync)
 4. [Launch & Schedule Integration](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#launch--schedule-integration)
 
 
