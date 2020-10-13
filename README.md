@@ -55,9 +55,8 @@ When you have completed this code pattern, you will understand how to:
 3. [Setup Maximo EAM Software ](#2-setup-the-maximo-eam).
 4. [Setup App Connect](#2-setup-app-connect).
 5. [Import, configure and run the App Connect message flows](#7-update-the-provided-app-connect-application-configuration-to-publish-data-to-monitor)
-. [Send oil well down time data from the PI data historian to Maximo Asset Monitor](#8-send-oil-well-down-time-data-from-the-pi-data-historian-to-maximo-asset-monitor).
-9. [View oil well down time data in Maximo Asset Monitor](#9-view-oil-well-down-time-data-in-maximo-asset-monitor).
-10. [Create a dashboard to monitor oil well operations in Maximo Asset Monitor](#10-create-a-dashboard-to-monitor-oil-well-operations-in-maximo-asset-monitor).  
+6. [Test Run the Flows in App Connect](#8-send-oil-well-down-time-data-from-the-pi-data-historian-to-maximo-asset-monitor).
+7. [VMap Additional Attributes](#9-view-oil-well-down-time-data-in-maximo-asset-monitor).
 
 ### 1. Clone the repo
 
@@ -81,21 +80,19 @@ Read the instructions in the [App Connect Setup document](app_connect_setup.md)
 * In App Connect, import the [setup flow](maximo_workday_intial_setup_crafts.yaml) and the [integration events flow](maximo_workday_get_integration_events.yaml) using these [instructions](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_exportingimportingapiflows.htm)   
 * Open each flow and update the Maximo and Workday Connector node accounts wth your own [accounts](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_connectingtoaccounts.html). 
 
-### Test Run the Flows
+### 6. Test Run the Flows in App Connect
 * In App Connect run the setup crafts flow you imported in the previous step. Stop the flow after 10 minutes.  
 * Check that the crafts have been added in Maximo.
 * In App Connect Run the get integrations event flow you imported in the previous step. The flow will run every 5 minutes.  Change the flow scheduler to once per day if you only expect your employee data to change once per day. 
 * Check that the users and labors have been added in Maximo.
 * In Maximo create a new Maximo Worker Order and assign a labor that was replicated from Workday.
+* Use the [App Connect logs](https://developer.ibm.com/integration/docs/app-connect/troubleshooting/viewing-app-connect-logs-in-the-log-viewer/) to trouble shoot App Connect Message Flows you imported and configured.
 
-### 6. Map Additional Attributes
+### 7. Extend the Code Pattern by Mapping Additional Attributes
 * To share attributes across Maximo and Workday map objects shown in the architecture steps
 * Add any other mappings for attributes your organization needs in the App Connect message flow. 
-* Be careful to not exceed the maximum character length allowed for an Maximo objec'ts attribute.
-
-Data Types
-The data type you select from the Data tab of the Profile Properties dialog box must match the data type defined for the Lead or Contact field in Salesforce. Preference attributes require Boolean data types for the Lead or Contact field in Salesforce.
-* Use the [App Connect logs](https://developer.ibm.com/integration/docs/app-connect/troubleshooting/viewing-app-connect-logs-in-the-log-viewer/) to trouble shoot
+* Be careful to not exceed the maximum character length allowed for an Maximo object attribute and map the data types for number, string, array or object.
+* Initially map the minium requires attributes for a given flow.
   
 ## References
 See the [references document](references.md) for the list of references used to create this Code Pattern.

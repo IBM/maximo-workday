@@ -1,4 +1,7 @@
-## Create an IBM App Connect service in IBM Cloud
+# Steps
+1 
+
+## 1. Create an IBM App Connect service in IBM Cloud
   - Create an [IBM Trial Account](https://cloud.ibm.com/registration/premium?lnk=ukCloudExp&lnk=STW_UK_BUHP_L1_BTN&psrc=NONE&pexp=DEF&lnk2=trial_Cloud) 
   - From IBM Cloud Dashboard click `create resource` button 
   - Select `App Connect` tile in the catalog  ![App Connect Tile](images/app_connect_catalog_tile.png)  
@@ -25,13 +28,13 @@
   - Click "Offering Dashboard" ![IBM Cloud Catalog](images/catalog.png) Accept token exceptions
   - Select Red Hat authentication mechanism for  ![OpenShif Authenticationt ](images/cloud_pak_for_integration_authentication.png]) which will then open the 
    
-##  Launch App Connect Dashboard Using IBM Cloud
+##  2.  Launch App Connect Dashboard Using IBM Cloud
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
   - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.  ![App Connect Service in Resources](images/app_connect_resource.png)
   - Click on the name of the service
   - Click on `Launch App Connect` button to opn App Connect dashboard in a new tab window  ![Launch App Connect Dashboard](images/app_connect_launch.png) into your cluster  &nbsp;  
   
-## Configure App Connect Secure Gateway Client (Only required if your Maximo Service is behind Firefwall)
+##  3.  Configure App Connect Secure Gateway Client (Only required if your Maximo Service is behind Firefwall)
   - Launch the App Connect Service Dashboard from the IBM Cloud 
   - From menu choose `Private Networkd Connections` 
   - Choose `Networks` at top of the page which will open in another tab ![App Connect Networks](images/app_connect_networks.png) &nbsp; 
@@ -52,29 +55,25 @@
   - When asked in the terminal  `Enter the additional startup options separated by spaces:` enter blank 
   - Go to App Connect `Private Networks`  and `Networks` to see the new network connection![App Connect Networks](images/app_connect_setup_networks_connected.png) &nbsp;  
 
-## Create an App Connect Application Connection for Maximo 
+## 4.  Create an App Connect Application Connection for Maximo 
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
   - Click on `Applications`tab ![Add Application](images/app_connect_maximo_catalog_application.png) and `Add Account` option&nbsp; 
   - Enter your Maximo `Hostname`, `User name`,  `Password` and `Network` name you created in in previous configure App Connect Secure Gateway Client `Add your API or web service now` ![Add Application Details](images/app_connect_maximo_catalog_application_network.png) &nbsp;  
   - You should now be able to connect message flows to Maximo.
 
-## Create an App Connect Application Connection for Workday 
+## 5.  Create an App Connect Application Connection for Workday 
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
   - Click on `Applications`tab ![Add Application](images/app_connect_workday_catalog_application.png) and `Add Account` option&nbsp; 
   - Enter your Workday `Hostname`, `User name`,  `Password` &nbsp;  
   - You should now be able to connect message flows to Workday.
 
-## Create an App Connect API for Workday (Optional)
+## 6.  Create an App Connect API for Workday (Optional)
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
   - Click on `APIs`tab ![Add API WSDL](images/appconnect-api.png) &nbsp; 
   - Click on `Add your API or web service now` link to add the Workday API WSDL  
   - You should now be able to expand the Workday API and see available methods.  ![Workday WSDL API](images/app_connect_workday_api.png) &nbsp;  
   
-## Create an Event Driven Flow to Get Workers from Workday  (Optional)
-  - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
-  - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.
-
-## Creating a flow for an existing SWAGGER API (Optional)
+## 7.  Creating a flow for an existing SWAGGER API (Optional)
 Creating a flow for an API for Workday to post workers into an App Connect HTTP Post Endpoint.  If you want a developer to be able to create an application that uses the data in your cloud-based applications, you can provide an API. To create flows for an API, complete the following steps.
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
   - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.
