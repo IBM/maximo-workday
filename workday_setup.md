@@ -2,10 +2,10 @@
 
 ## Steps
 
-1. [Create Report Maximo Skills](#Create-Report-Maximo-Skills)
-2. [Creare Report Maximo Crafts](Create-report-Maximo-Crafts)
-3. [Configure Scheduled Integration - Maximo Person Sync](#Configure-Scheduled-Integration-Maximo-Person-Sync)
-4. [Launch & Schedule Integration](#Launch-&-ScheduleIntegration)
+1. [Create Report Maximo Skills](#create-report-maximo-skills)
+2. [Create Report Maximo Crafts](#create-report-maximo-crafts)
+3. [Configure Scheduled Integration - Maximo Person Sync](#configure-scheduled-integration---maximo-person-sync)
+4. [Launch & Schedule Integration](#launch--schedule-integration)
 
 
 ## For One Time Load
