@@ -32,12 +32,12 @@ When you have completed this code pattern, you will understand how to:
 ## Architecture
 
 There are two integration message flows used in this code pattern to replicate HR employee data from Workday to Maximo Asset Manager.  
-The `Setup Skills` App Connect flow creates  Maximo `Crafts` in a `Domain` using Workday  `Skills`.   The App Connect
+The `Setup Crafts` App Connect flow creates  Maximo `Crafts` in a `Domain` using Workday  `Skills`.   The App Connect
 HTTP node invokes the Workday `Report` to get the list Skills.   This message flow is only invoked one time to initially 
 setup the Maximo Workday HR integration.
  
-The `Update Labor` flow retrieves worker information from Workday and maps objects and their minimum required attributes 
-to create a Maximo `person` and `labor` using the `crafts` provided in the `Setup Skills` flow.    The App Connect
+The `Update Labor Using Integration Events` flow retrieves worker information from Workday and maps objects and their minimum required attributes 
+to create a Maximo `person` and `labor` using the `crafts` provided in the `Setup Crafts` flow.    The App Connect
 Workday Application node invokes the Workday `Get Integration IDs` teamplate to get the list oe event IDs. These return 
 a document URL for `worker.json` that has the information required by the App Connect Maximo Application node to create 
 `labor` that can be assigned to a Maximo `Work Order`.  The `Update Labor` flow is  intended to run daily so that as new 
@@ -49,19 +49,19 @@ Workday into arrays and attributes that can be mapped to the Maximo.
 
 **Setup Skills Flow Logical Diagram**
 
-  ![Setup Skills Message Flow](images/SetupFlowLogicalDiagram.png)
+  ![Setup Crafts Message Flow](images/SetupFlowLogicalDiagram.png)
 
 
 **Update Labor Flow Logical Diagram**
 
-  ![Setup Skills Message Flow](images/LaborFlowLogicalDiagram.png)
+  ![Update Labor Using Integration Events Message Flow](images/LaborFlowLogicalDiagram.png)
 
 
 ## Steps
 
 1. [Clone the repo](#1-clone-the-repo).
 2. [Setup Workday](#2-setup-workday).
-3. [Setup Maximo EAM Software ](#3-setup-the-maximo-eam).
+3. [Setup Maximo EAM](#3-setup-the-maximo-eam).
 4. [Setup App Connect](#4-setup-app-connect).
 5. [Import, configure and run the App Connect message flows](#5-update-the-provided-app-connect-application-configuration-to-publish-data-to-monitor)
 6. [Test Run the Flows in App Connect](#6-test-run-the-flows-in-app-onnect).
