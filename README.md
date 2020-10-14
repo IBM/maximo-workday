@@ -32,7 +32,7 @@ When you have completed this code pattern, you will understand how to:
 ## Architecture
 
 There are two integration message flows used in this code pattern to replicate HR employee data from Workday to Maximo Asset Manager.  
-The `Setup Crafts` App Connect flow creates  Maximo `Crafts` in a `Domain` using Workday  `Skills`.   The App Connect
+The `Setup Crafts` App Connect flow creates  Maximo `Crafts` in a `Domain` using Workday `Skills`.   The App Connect
 HTTP node invokes the Workday `Report` to get the list Skills.   This message flow is only invoked one time to initially 
 setup the Maximo Workday HR integration.
  
@@ -47,7 +47,7 @@ skills the updated status will be reflected in Maximo.
 An App Connect `Scheduler` node initiates both flows.   The `Proxy` node transforms the json documents returned from 
 Workday into arrays and attributes that can be mapped to the Maximo. 
 
-**Setup Skills Flow Logical Diagram**
+**Setup Crafts Flow Logical Diagram**
 
   ![Setup Crafts Message Flow](images/SetupFlowLogicalDiagram.png)
 
