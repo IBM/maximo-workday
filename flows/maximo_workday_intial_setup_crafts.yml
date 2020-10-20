@@ -33,21 +33,28 @@ integration:
       type: api-action
       business-object: request
       connector-type: http
-      account-name: Account 2
+      account-name: Account 3
       actions:
         INVOKE: {}
+    action-interface-5:
+      type: api-action
+      business-object: mxapidomain
+      connector-type: maximo
+      account-name: Account 1
+      actions:
+        REPLACEORCREATE_RM: {}
     action-interface-3:
       type: api-action
       business-object: mxapicraft
       connector-type: maximo
-      account-name: Account 2
+      account-name: Account 1
       actions:
         UPSERTWITHWHERE: {}
     action-interface-1:
       type: api-action
       business-object: request
       connector-type: http
-      account-name: Account 2
+      account-name: Account 3
       actions:
         INVOKE: {}
   assemblies:
@@ -86,7 +93,7 @@ integration:
                       template: Info
                   - logMessage:
                       template: >-
-                        Log Done calling Workday for
+                        Log 6 Done calling Workday for
                         RPT_INT_Maximo_Skills{{$HTTPInvokemethod.responseBody}}
           - parse:
               name: JSON Parser Parse
@@ -141,6 +148,32 @@ integration:
                           type: string
                 title: Parsed JSON
           - custom-action:
+              name: IBM Maximo Replace or create domain
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-5'
+              action: REPLACEORCREATE_RM
+              map:
+                mappings:
+                  - alndomain:
+                      foreach:
+                        input: '$JSONParserParse.Report_Entry '
+                        iterator: alndomainItem
+                        mappings:
+                          - value:
+                              template: '{{$alndomainItem.Skill[0]}}'
+                  - domainid:
+                      template: SKILLLEVEL
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: HTTPInvokemethod
+                    $ref: '#/node-output/HTTP Invoke method/response/payload'
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+          - custom-action:
               name: HTTP Invoke method 2
               target:
                 $ref: '#/integration/action-interfaces/action-interface-1'
@@ -162,6 +195,10 @@ integration:
                     $ref: '#/node-output/HTTP Invoke method/response'
                   - variable: JSONParserParse
                     $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
           - logging:
               name: Log
               map:
@@ -175,6 +212,10 @@ integration:
                     $ref: '#/node-output/HTTP Invoke method/response'
                   - variable: JSONParserParse
                     $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
                   - variable: HTTPInvokemethod2
                     $ref: '#/node-output/HTTP Invoke method 2/response/payload'
                   - variable: HTTPInvokemethod2Metadata
@@ -379,6 +420,9 @@ integration:
               target:
                 $ref: '#/integration/action-interfaces/action-interface-3'
               map:
+                mappings:
+                  - craftid:
+                      expression: '$Foreach2item.job_profile_id '
                 $map: 'http://ibm.com/appconnect/map/v1'
                 input:
                   - variable: Foreach2item
@@ -391,13 +435,16 @@ integration:
                     $ref: '#/node-output/HTTP Invoke method/response'
                   - variable: JSONParserParse
                     $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
                   - variable: HTTPInvokemethod2
                     $ref: '#/node-output/HTTP Invoke method 2/response/payload'
                   - variable: HTTPInvokemethod2Metadata
                     $ref: '#/node-output/HTTP Invoke method 2/response'
                   - variable: JSONParserParse2
                     $ref: '#/node-output/JSON Parser Parse 2/response/payload'
-                mappings: []
               filter:
                 where:
                   and:
@@ -414,6 +461,10 @@ integration:
                     $ref: '#/node-output/HTTP Invoke method/response'
                   - variable: JSONParserParse
                     $ref: '#/node-output/JSON Parser Parse/response/payload'
+                  - variable: IBMMaximoReplaceorcreatedomain
+                    $ref: >-
+                      #/node-output/IBM Maximo Replace or create
+                      domain/response/payload
                   - variable: HTTPInvokemethod2
                     $ref: '#/node-output/HTTP Invoke method 2/response/payload'
                   - variable: HTTPInvokemethod2Metadata
