@@ -29,20 +29,6 @@ integration:
                   timeZone: UTC
       account-name: Account 1
   action-interfaces:
-    action-interface-2:
-      type: api-action
-      business-object: request
-      connector-type: http
-      account-name: Account 3
-      actions:
-        INVOKE: {}
-    action-interface-5:
-      type: api-action
-      business-object: mxapidomain
-      connector-type: maximo
-      account-name: Account 1
-      actions:
-        REPLACEORCREATE_RM: {}
     action-interface-3:
       type: api-action
       business-object: mxapicraft
@@ -62,118 +48,6 @@ integration:
       assembly:
         execute:
           - custom-action:
-              name: HTTP Invoke method
-              target:
-                $ref: '#/integration/action-interfaces/action-interface-2'
-              action: INVOKE
-              map:
-                mappings:
-                  - method:
-                      template: GET
-                  - url:
-                      template: >-
-                        https://wd2-impl-services1.workday.com/ccx/service/customreport2/ibmsrv_dpt5/lmcneil/RPT_INT_Maximo_Skills?format=json
-                $map: 'http://ibm.com/appconnect/map/v1'
-                input:
-                  - variable: Trigger
-                    $ref: '#/trigger/payload'
-          - logging:
-              name: Log 6
-              map:
-                $map: 'http://ibm.com/appconnect/map/v1'
-                input:
-                  - variable: Trigger
-                    $ref: '#/trigger/payload'
-                  - variable: HTTPInvokemethod
-                    $ref: '#/node-output/HTTP Invoke method/response/payload'
-                  - variable: HTTPInvokemethodMetadata
-                    $ref: '#/node-output/HTTP Invoke method/response'
-                mappings:
-                  - logLevel:
-                      template: Info
-                  - logMessage:
-                      template: >-
-                        Log 6 Done calling Workday for
-                        RPT_INT_Maximo_Skills{{$HTTPInvokemethod.responseBody}}
-          - parse:
-              name: JSON Parser Parse
-              parse-format: json
-              source:
-                template: '{{$HTTPInvokemethod.responseBody}}'
-                input:
-                  - variable: Trigger
-                    $ref: '#/trigger/payload'
-                  - variable: HTTPInvokemethod
-                    $ref: '#/node-output/HTTP Invoke method/response/payload'
-                  - variable: HTTPInvokemethodMetadata
-                    $ref: '#/node-output/HTTP Invoke method/response'
-              sample-data: |-
-                {
-                "Report_Entry": [{"Skill": "Electrician Apprentice"},
-                {"Skill": "Electrician - 1st Class"},
-                {"Skill": "Electrician - 2nd Class"},
-                {"Skill": "1st Class Construction Worker"},
-                {"Skill": "Driver - Class 1"},
-                {"Skill": "Inspector"},
-                {"Skill": "Lubricator Apprentice"},
-                {"Skill": "Lubricator - 1st Class"},
-                {"Skill": "Machinist Apprentice"},
-                {"Skill": "Machinist 1st Class"},
-                {"Skill": "Machinist 2nd Class"},
-                {"Skill": "Machinist 3rd Class"},
-                {"Skill": "Overhead Line Maintenance"},
-                {"Skill": "Pipefitter"},
-                {"Skill": "Supervisor"},
-                {"Skill": "Apprentice Welder"},
-                {"Skill": "Journeyman Welder"},
-                {"Skill": "Apprentice Carpenter"},
-                {"Skill": "1st Class Carpenter"},
-                {"Skill": "2nd Class Carpenter"},
-                {"Skill": "Aircraft Mechanic"},
-                {"Skill": "Mechanic Apprentice"},
-                {"Skill": "Mechanic 1st Class"},
-                {"Skill": "Mechanic 2nd Class"},
-                {"Skill": "Millwright"}]
-                }
-              output-schema:
-                $schema: 'http://json-schema.org/draft-04/schema#'
-                type: object
-                properties:
-                  Report_Entry:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        Skill:
-                          type: string
-                title: Parsed JSON
-          - custom-action:
-              name: IBM Maximo Replace or create domain
-              target:
-                $ref: '#/integration/action-interfaces/action-interface-5'
-              action: REPLACEORCREATE_RM
-              map:
-                mappings:
-                  - alndomain:
-                      foreach:
-                        input: '$JSONParserParse.Report_Entry '
-                        iterator: alndomainItem
-                        mappings:
-                          - value:
-                              template: '{{$alndomainItem.Skill[0]}}'
-                  - domainid:
-                      template: SKILLLEVEL
-                $map: 'http://ibm.com/appconnect/map/v1'
-                input:
-                  - variable: Trigger
-                    $ref: '#/trigger/payload'
-                  - variable: HTTPInvokemethod
-                    $ref: '#/node-output/HTTP Invoke method/response/payload'
-                  - variable: HTTPInvokemethodMetadata
-                    $ref: '#/node-output/HTTP Invoke method/response'
-                  - variable: JSONParserParse
-                    $ref: '#/node-output/JSON Parser Parse/response/payload'
-          - custom-action:
               name: HTTP Invoke method 2
               target:
                 $ref: '#/integration/action-interfaces/action-interface-1'
@@ -189,16 +63,6 @@ integration:
                 input:
                   - variable: Trigger
                     $ref: '#/trigger/payload'
-                  - variable: HTTPInvokemethod
-                    $ref: '#/node-output/HTTP Invoke method/response/payload'
-                  - variable: HTTPInvokemethodMetadata
-                    $ref: '#/node-output/HTTP Invoke method/response'
-                  - variable: JSONParserParse
-                    $ref: '#/node-output/JSON Parser Parse/response/payload'
-                  - variable: IBMMaximoReplaceorcreatedomain
-                    $ref: >-
-                      #/node-output/IBM Maximo Replace or create
-                      domain/response/payload
           - logging:
               name: Log
               map:
