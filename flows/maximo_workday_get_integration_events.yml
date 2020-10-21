@@ -33,7 +33,7 @@ integration:
       type: api-action
       business-object: Integrations___Get_Integration_Events
       connector-type: workday
-      account-name: Account 9
+      account-name: Account 1
       actions:
         Get_Integration_Events: {}
     action-interface-2:
@@ -47,7 +47,14 @@ integration:
       type: api-action
       business-object: mxapiperuser
       connector-type: maximo
-      account-name: Account 2
+      account-name: Account 1
+      actions:
+        UPSERTWITHWHERE: {}
+    action-interface-4:
+      type: api-action
+      business-object: mxapilabor
+      connector-type: maximo
+      account-name: Account 1
       actions:
         UPSERTWITHWHERE: {}
   assemblies:
@@ -71,7 +78,7 @@ integration:
                                         template: >-
                                           INT_STD_MaximoPersonSyncCollection/INT_STD_MaximoPersonSync/StartHere
                         - Sent_After___Date:
-                            template: '2020-09-18T04:00:51.046-07:00'
+                            template: '2020-10-05T08:40:00.000-07:00'
                   - Response_Filter:
                       mappings:
                         - Count:
@@ -82,13 +89,11 @@ integration:
                 input:
                   - variable: Trigger
                     $ref: '#/trigger/payload'
-          - for-each:
-              name: For each
-              assembly:
-                $ref: '#/integration/assemblies/assembly-2'
+          - parse:
+              name: JSON Parser Parse
+              parse-format: json
               source:
-                expression: >-
-                  $WorkdayGetIntegrationEvents.Response_Data.Integration_Event.Background_Process_Instance_Data.Output_Document_Data 
+                template: '{{$WorkdayGetIntegrationEvents.Response_Data}}'
                 input:
                   - variable: Trigger
                     $ref: '#/trigger/payload'
@@ -96,6 +101,395 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+              sample-data: |-
+                {
+                    "Integration_Event": [
+                      {
+                        "Integration_Event_Reference": {
+                          "ID__NORMALIZED": {
+                            "WID": "df5291369b5101fc495f2fed70275004",
+                            "Background_Process_Instance_ID": "INTEGRATION_ESB_INVOCATION-6-20023"
+                          }
+                        },
+                        "Integration_Event_Data": {
+                          "Integration_System_Reference": {
+                            "ID__NORMALIZED": {
+                              "WID": "d390457a170a017b4e0fccb25121a708",
+                              "Integration_System_ID": "INT_STD_MaximoPersonSyncCollection/INT_STD_MaximoPersonSync/StartHere"
+                            }
+                          },
+                          "Process_Description": "INT_STD_MaximoPersonSync",
+                          "Initiated_DateTime": "2020-10-05T15:44:32.618Z",
+                          "Integration_Response_Message": "Integration Completed.",
+                          "Completed_DateTime": "2020-10-05T15:44:42.993Z",
+                          "Initiated_By_System_Account_Reference": {
+                            "ID__NORMALIZED": {
+                              "WID": "3ebe69275f2a41979f43a04d5a61cab3",
+                              "System_User_ID": "lmcneil",
+                              "WorkdayUserName": "lmcneil"
+                            }
+                          },
+                          "Percent_Complete": "1",
+                          "Integration_Runtime_Parameter_Data": [
+                            {
+                              "Launch_Configurable_Name": "INT_STD_MaximoPersonSyncCollection/INT_STD_MaximoPersonSync/StartHere",
+                              "Parameter_Name": [
+                                {
+                                  "$attributes": {
+                                    "Label": "Integration Event"
+                                  },
+                                  "$value": "Text"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        "Background_Process_Instance_Data": {
+                          "Background_Process_Instance_Status_Reference": {
+                            "ID__NORMALIZED": {
+                              "WID": "d8b0bcd8446c11de98360015c5e6daf6",
+                              "Background_Process_Instance_Status_ID": "Completed"
+                            }
+                          },
+                          "Parent_Event_Reference": {
+                            "ID__NORMALIZED": {
+                              "WID": "df5291369b51011ebb4aedec70274904"
+                            }
+                          },
+                          "Background_Process_Message_Data": [
+                            {
+                              "Timestamp": "2020-10-05T15:44:39.600Z",
+                              "Severity_Level_Reference": {
+                                "ID__NORMALIZED": {
+                                  "WID": "dc0f8382446c11de98360015c5e6daf6",
+                                  "Message_Severity_Level": "INFO"
+                                }
+                              },
+                              "Message_Summary": "Getting Worker Skills"
+                            },
+                            {
+                              "Timestamp": "2020-10-05T15:44:41.645Z",
+                              "Severity_Level_Reference": {
+                                "ID__NORMALIZED": {
+                                  "WID": "dc0f8382446c11de98360015c5e6daf6",
+                                  "Message_Severity_Level": "INFO"
+                                }
+                              },
+                              "Message_Summary": "Log File.htm"
+                            },
+                            {
+                              "Timestamp": "2020-10-05T15:44:41.836Z",
+                              "Severity_Level_Reference": {
+                                "ID__NORMALIZED": {
+                                  "WID": "dc0f8382446c11de98360015c5e6daf6",
+                                  "Message_Severity_Level": "INFO"
+                                }
+                              },
+                              "Message_Summary": "Worker.json"
+                            }
+                          ],
+                          "Output_Document_Data": [
+                            {
+                              "Integration_Repository_Document_Reference": {
+                                "ID__NORMALIZED": {
+                                  "WID": "df5291369b51015e136111ef70275504",
+                                  "Document_ID": "cloud/4b2a4c20-7669-4967-3154-1478336b2c7d"
+                                }
+                              },
+                              "Integration_Repository_Document_Data": {
+                                "$attributes": {
+                                  "Document_ID": "cloud/4b2a4c20-7669-4967-3154-1478336b2c7d",
+                                  "File_Name": "Worker.json"
+                                },
+                                "File_Size": "205177",
+                                "Content_Type_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "d969a07a5d4410000f3d5750e4dd001c",
+                                    "Content_Type_ID": "application/json"
+                                  }
+                                },
+                                "Document_Type_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "dc72b65a446c11de98360015c5e6daf6",
+                                    "Document_Type_ID": "TXT"
+                                  }
+                                },
+                                "Expiration_Timestamp": "2021-04-03T15:44:41.000Z",
+                                "Owner_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "3ebe69275f2a41979f43a04d5a61cab3",
+                                    "System_User_ID": "lmcneil",
+                                    "WorkdayUserName": "lmcneil"
+                                  }
+                                },
+                                "Document_Tag_Reference": [
+                                  {
+                                    "ID__NORMALIZED": {
+                                      "WID": "df3520a3ef69432bbd9f48ed808dbd18",
+                                      "Workday_Document_Tag_Name": "Deliverable"
+                                    }
+                                  },
+                                  {
+                                    "ID__NORMALIZED": {
+                                      "WID": "9730c01e758601f534187bc3ea21e308",
+                                      "Document_Tag_Name": "Person"
+                                    }
+                                  }
+                                ],
+                                "Custom_Document_Tag": [
+                                  "Person"
+                                ]
+                              }
+                            },
+                            {
+                              "Integration_Repository_Document_Reference": {
+                                "ID__NORMALIZED": {
+                                  "WID": "df5291369b5101258d0406ef70275304",
+                                  "Document_ID": "cloud/2b265e65-0064-4777-2b43-4a232b5a670c"
+                                }
+                              },
+                              "Integration_Repository_Document_Data": {
+                                "$attributes": {
+                                  "Document_ID": "cloud/2b265e65-0064-4777-2b43-4a232b5a670c",
+                                  "File_Name": "Log File.htm"
+                                },
+                                "File_Size": "17639",
+                                "Content_Type_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "d9ae66b2446c11de98360015c5e6daf6",
+                                    "Content_Type_ID": "text/html"
+                                  }
+                                },
+                                "Document_Type_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "dc72b826446c11de98360015c5e6daf6",
+                                    "Document_Type_ID": "HTML"
+                                  }
+                                },
+                                "Expiration_Timestamp": "2020-10-12T15:44:41.000Z",
+                                "Owner_Reference": {
+                                  "ID__NORMALIZED": {
+                                    "WID": "3ebe69275f2a41979f43a04d5a61cab3",
+                                    "System_User_ID": "lmcneil",
+                                    "WorkdayUserName": "lmcneil"
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+              output-schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                type: object
+                properties:
+                  Integration_Event:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Integration_Event_Reference:
+                          type: object
+                          properties:
+                            ID__NORMALIZED:
+                              type: object
+                              properties:
+                                WID:
+                                  type: string
+                                Background_Process_Instance_ID:
+                                  type: string
+                        Integration_Event_Data:
+                          type: object
+                          properties:
+                            Integration_System_Reference:
+                              type: object
+                              properties:
+                                ID__NORMALIZED:
+                                  type: object
+                                  properties:
+                                    WID:
+                                      type: string
+                                    Integration_System_ID:
+                                      type: string
+                            Process_Description:
+                              type: string
+                            Initiated_DateTime:
+                              type: string
+                            Integration_Response_Message:
+                              type: string
+                            Completed_DateTime:
+                              type: string
+                            Initiated_By_System_Account_Reference:
+                              type: object
+                              properties:
+                                ID__NORMALIZED:
+                                  type: object
+                                  properties:
+                                    WID:
+                                      type: string
+                                    System_User_ID:
+                                      type: string
+                                    WorkdayUserName:
+                                      type: string
+                            Percent_Complete:
+                              type: string
+                            Integration_Runtime_Parameter_Data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  Launch_Configurable_Name:
+                                    type: string
+                                  Parameter_Name:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        $attributes:
+                                          type: object
+                                          properties:
+                                            Label:
+                                              type: string
+                                        $value:
+                                          type: string
+                        Background_Process_Instance_Data:
+                          type: object
+                          properties:
+                            Background_Process_Instance_Status_Reference:
+                              type: object
+                              properties:
+                                ID__NORMALIZED:
+                                  type: object
+                                  properties:
+                                    WID:
+                                      type: string
+                                    Background_Process_Instance_Status_ID:
+                                      type: string
+                            Parent_Event_Reference:
+                              type: object
+                              properties:
+                                ID__NORMALIZED:
+                                  type: object
+                                  properties:
+                                    WID:
+                                      type: string
+                            Background_Process_Message_Data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  Timestamp:
+                                    type: string
+                                  Severity_Level_Reference:
+                                    type: object
+                                    properties:
+                                      ID__NORMALIZED:
+                                        type: object
+                                        properties:
+                                          WID:
+                                            type: string
+                                          Message_Severity_Level:
+                                            type: string
+                                  Message_Summary:
+                                    type: string
+                            Output_Document_Data:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  Integration_Repository_Document_Reference:
+                                    type: object
+                                    properties:
+                                      ID__NORMALIZED:
+                                        type: object
+                                        properties:
+                                          WID:
+                                            type: string
+                                          Document_ID:
+                                            type: string
+                                  Integration_Repository_Document_Data:
+                                    type: object
+                                    properties:
+                                      $attributes:
+                                        type: object
+                                        properties:
+                                          Document_ID:
+                                            type: string
+                                          File_Name:
+                                            type: string
+                                      File_Size:
+                                        type: string
+                                      Content_Type_Reference:
+                                        type: object
+                                        properties:
+                                          ID__NORMALIZED:
+                                            type: object
+                                            properties:
+                                              WID:
+                                                type: string
+                                              Content_Type_ID:
+                                                type: string
+                                      Document_Type_Reference:
+                                        type: object
+                                        properties:
+                                          ID__NORMALIZED:
+                                            type: object
+                                            properties:
+                                              WID:
+                                                type: string
+                                              Document_Type_ID:
+                                                type: string
+                                      Expiration_Timestamp:
+                                        type: string
+                                      Owner_Reference:
+                                        type: object
+                                        properties:
+                                          ID__NORMALIZED:
+                                            type: object
+                                            properties:
+                                              WID:
+                                                type: string
+                                              System_User_ID:
+                                                type: string
+                                              WorkdayUserName:
+                                                type: string
+                                      Document_Tag_Reference:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            ID__NORMALIZED:
+                                              type: object
+                                              properties:
+                                                WID:
+                                                  type: string
+                                                Workday_Document_Tag_Name:
+                                                  type: string
+                                                Document_Tag_Name:
+                                                  type: string
+                                      Custom_Document_Tag:
+                                        type: array
+                                        items:
+                                          type: string
+                title: Parsed JSON
+          - for-each:
+              name: For each
+              assembly:
+                $ref: '#/integration/assemblies/assembly-2'
+              source:
+                expression: >-
+                  $JSONParserParse.Integration_Event.Background_Process_Instance_Data.Output_Document_Data
+                input:
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: WorkdayGetIntegrationEvents
+                    $ref: >-
+                      #/node-output/Workday Get Integration
+                      Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
               mode: sequential
               continue-on-error: true
               map:
@@ -105,10 +499,14 @@ integration:
                     $ref: '#/block/For each/current-item'
                   - variable: Trigger
                     $ref: '#/trigger/payload'
+                  - variable: Foreach3
+                    $ref: '#/block/For each/node-output/For each 3/response/payload'
                   - variable: WorkdayGetIntegrationEvents
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
                 customSchemas:
                   properties.`output`:
                     type: object
@@ -120,6 +518,8 @@ integration:
                           properties: {}
                 mappings: []
               display-name: Workday Output_Document_Data
+        tags:
+          - incomplete
     assembly-2:
       assembly:
         execute:
@@ -136,13 +536,13 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
                 mappings:
                   - logLevel:
                       template: Info
                   - logMessage:
-                      template: >-
-                        Log 2
-                        {{$Foreachitem.Integration_Repository_Document_Data."$attributes".Document_ID}}
+                      template: 'Log 2 '
           - if:
               name: If 2
               input:
@@ -154,6 +554,8 @@ integration:
                   $ref: >-
                     #/node-output/Workday Get Integration
                     Events/response/payload
+                - variable: JSONParserParse
+                  $ref: '#/node-output/JSON Parser Parse/response/payload'
               branch:
                 - condition:
                     '{{$Foreachitem.Integration_Repository_Document_Data."$attributes".File_Name}}': Worker.json
@@ -171,12 +573,14 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                           mappings:
                             - logLevel:
                                 template: Info
                             - logMessage:
                                 template: >-
-                                  Log 5 URL Plus Document ID 
+                                  Log 5 URL Plus Document ID
                                   https://wd2-impl-services1.workday.com/ccx/cc-blobitory/ibmsrv_dpt5/{{$Foreachitem.Integration_Repository_Document_Data."$attributes".Document_ID}}
                     - custom-action:
                         name: HTTP Invoke method
@@ -200,6 +604,8 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                     - logging:
                         name: Log 3
                         map:
@@ -221,6 +627,8 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                           mappings:
                             - logLevel:
                                 template: Info
@@ -254,6 +662,8 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                         sample-data: |-
                           {"worker": [{
                                 "employeeID": 21005,
@@ -470,8 +880,7 @@ integration:
                         assembly:
                           $ref: '#/integration/assemblies/assembly-3'
                         source:
-                          expression: >-
-                            $JSONParserParse2.worker.employeeID$JSONParserParse2.worker  
+                          expression: '$JSONParserParse2.worker '
                           input:
                             - variable: Foreachitem
                               $ref: '#/block/For each/current-item'
@@ -493,6 +902,8 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                         mode: sequential
                         continue-on-error: true
                         map:
@@ -508,14 +919,6 @@ integration:
                               $ref: >-
                                 #/block/For each 2/node-output/Set
                                 variable/response/payload
-                            - variable: IBMMaximoUpdateorcreateuser
-                              $ref: >-
-                                #/block/For each 2/node-output/IBM Maximo Update
-                                or create user/response/payload
-                            - variable: IBMMaximoUpdateorcreateuserMetadata
-                              $ref: >-
-                                #/block/For each 2/node-output/IBM Maximo Update
-                                or create user/response
                             - variable: HTTPInvokemethod
                               $ref: >-
                                 #/block/If 2/node-output/HTTP Invoke
@@ -532,6 +935,8 @@ integration:
                               $ref: >-
                                 #/node-output/Workday Get Integration
                                 Events/response/payload
+                            - variable: JSONParserParse
+                              $ref: '#/node-output/JSON Parser Parse/response/payload'
                           customSchemas:
                             properties.`output`:
                               type: object
@@ -548,6 +953,7 @@ integration:
                                       expression: >-
                                         $append($Setvariable.variable.worker,
                                         [])
+                        display-name: JSON Parser worker
               else:
                 execute:
                   - logging:
@@ -599,6 +1005,8 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
                 customSchemas:
                   properties.`variable`:
                     type: object
@@ -623,16 +1031,9 @@ integration:
                                   template: '{{$Foreach2item.firstName}}'
                               - last_name:
                                   template: '{{$Foreach2item.lastName}}'
-          - upsert-action:
-              name: IBM Maximo Update or create user
-              target:
-                $ref: '#/integration/action-interfaces/action-interface-3'
+          - logging:
+              name: Log
               map:
-                mappings:
-                  - firstname:
-                      template: '{{$Setvariable.variable.worker.first_name}}'
-                  - lastname:
-                      template: '{{$Setvariable.variable.worker.last_name}}'
                 $map: 'http://ibm.com/appconnect/map/v1'
                 input:
                   - variable: Foreach2item
@@ -659,9 +1060,26 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
-              filter:
-                where:
-                  personid: '{{$Setvariable.variable.worker.employee_id}}'
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: 'Employee ID{{$Foreach2item.employeeID}}'
+          - upsert-action:
+              name: IBM Maximo Update or create user
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-3'
+              map:
+                mappings:
+                  - firstname:
+                      template: '{{$Foreach2item.firstName}}'
+                  - lastname:
+                      template: '{{$Foreach2item.lastName}}'
+                  - primaryemail:
+                      template: '{{$Foreach2item.workEmail}}'
+                $map: 'http://ibm.com/appconnect/map/v1'
                 input:
                   - variable: Foreach2item
                     $ref: '#/block/For each 2/current-item'
@@ -687,8 +1105,40 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+              filter:
+                where:
+                  personid: '{{$Foreach2item.employeeID}}'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: Setvariable
+                    $ref: >-
+                      #/block/For each 2/node-output/Set
+                      variable/response/payload
+                  - variable: HTTPInvokemethod
+                    $ref: >-
+                      #/block/If 2/node-output/HTTP Invoke
+                      method/response/payload
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/block/If 2/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse2
+                    $ref: >-
+                      #/block/If 2/node-output/JSON Parser Parse
+                      2/response/payload
+                  - variable: WorkdayGetIntegrationEvents
+                    $ref: >-
+                      #/node-output/Workday Get Integration
+                      Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
           - logging:
-              name: Log
+              name: Log 6
               map:
                 $map: 'http://ibm.com/appconnect/map/v1'
                 input:
@@ -724,10 +1174,154 @@ integration:
                     $ref: >-
                       #/node-output/Workday Get Integration
                       Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
                 mappings:
                   - logLevel:
                       template: Info
                   - logMessage:
-                      template: '{{$IBMMaximoUpdateorcreateuserMetadata}}'
-  name: GetIntegrationEventsCF
+                      template: 'Created Maximo User{{$Foreach2item.employeeID}}'
+          - upsert-action:
+              name: IBM Maximo Update or create labor
+              target:
+                $ref: '#/integration/action-interfaces/action-interface-4'
+              map:
+                mappings:
+                  - laborcraftrate:
+                      foreach:
+                        input: $Foreach2item.jobProfile
+                        iterator: laborcraftrateItem
+                  - lbslocation:
+                      foreach:
+                        input: '$Setvariable.variable.worker '
+                        iterator: lbslocationItem
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: Setvariable
+                    $ref: >-
+                      #/block/For each 2/node-output/Set
+                      variable/response/payload
+                  - variable: IBMMaximoUpdateorcreateuser
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response/payload
+                  - variable: IBMMaximoUpdateorcreateuserMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response
+                  - variable: HTTPInvokemethod
+                    $ref: >-
+                      #/block/If 2/node-output/HTTP Invoke
+                      method/response/payload
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/block/If 2/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse2
+                    $ref: >-
+                      #/block/If 2/node-output/JSON Parser Parse
+                      2/response/payload
+                  - variable: WorkdayGetIntegrationEvents
+                    $ref: >-
+                      #/node-output/Workday Get Integration
+                      Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+              filter:
+                where:
+                  and:
+                    - laborcode: '{{$Foreach2item.employeeID}}'
+                    - orgid: EAGLENA
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: Setvariable
+                    $ref: >-
+                      #/block/For each 2/node-output/Set
+                      variable/response/payload
+                  - variable: IBMMaximoUpdateorcreateuser
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response/payload
+                  - variable: IBMMaximoUpdateorcreateuserMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response
+                  - variable: HTTPInvokemethod
+                    $ref: >-
+                      #/block/If 2/node-output/HTTP Invoke
+                      method/response/payload
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/block/If 2/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse2
+                    $ref: >-
+                      #/block/If 2/node-output/JSON Parser Parse
+                      2/response/payload
+                  - variable: WorkdayGetIntegrationEvents
+                    $ref: >-
+                      #/node-output/Workday Get Integration
+                      Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+          - logging:
+              name: Log 7
+              map:
+                $map: 'http://ibm.com/appconnect/map/v1'
+                input:
+                  - variable: Foreach2item
+                    $ref: '#/block/For each 2/current-item'
+                  - variable: Foreachitem
+                    $ref: '#/block/For each/current-item'
+                  - variable: Trigger
+                    $ref: '#/trigger/payload'
+                  - variable: Setvariable
+                    $ref: >-
+                      #/block/For each 2/node-output/Set
+                      variable/response/payload
+                  - variable: IBMMaximoUpdateorcreateuser
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response/payload
+                  - variable: IBMMaximoUpdateorcreateuserMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      user/response
+                  - variable: IBMMaximoUpdateorcreatelabor
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      labor/response/payload
+                  - variable: IBMMaximoUpdateorcreatelaborMetadata
+                    $ref: >-
+                      #/block/For each 2/node-output/IBM Maximo Update or create
+                      labor/response
+                  - variable: HTTPInvokemethod
+                    $ref: >-
+                      #/block/If 2/node-output/HTTP Invoke
+                      method/response/payload
+                  - variable: HTTPInvokemethodMetadata
+                    $ref: '#/block/If 2/node-output/HTTP Invoke method/response'
+                  - variable: JSONParserParse2
+                    $ref: >-
+                      #/block/If 2/node-output/JSON Parser Parse
+                      2/response/payload
+                  - variable: WorkdayGetIntegrationEvents
+                    $ref: >-
+                      #/node-output/Workday Get Integration
+                      Events/response/payload
+                  - variable: JSONParserParse
+                    $ref: '#/node-output/JSON Parser Parse/response/payload'
+                mappings:
+                  - logLevel:
+                      template: Info
+                  - logMessage:
+                      template: Finished Create Labor
+  name: GetIntegrationEventsCF_1
 models: {}

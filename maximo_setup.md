@@ -5,8 +5,8 @@
      - MXAPICRAFT
      - MXAPIPERUSER
      - MXAPILABOR
-(https://www.ibm.com/support/knowledgecenter/en/SSLKT6_7.6.1.2/com.ibm.mbs.doc/asset/t_dt_object_structure_sec.html)
+[Configure Object Structures](https://www.ibm.com/support/knowledgecenter/en/SSLKT6_7.6.1.2/com.ibm.mbs.doc/asset/t_dt_object_structure_sec.html)
 - Increase the lengths of
     - SKILLEVEL Domain to 30
     - CRAFT attribute on the CRAFT object to 30
-(https://www.ibm.com/support/knowledgecenter/en/SSLKT6_7.6.1.2/com.ibm.mbs.doc/configur/c_db_config.html)
+[Configure Database](https://www.ibm.com/support/knowledgecenter/en/SSLKT6_7.6.1.2/com.ibm.mbs.doc/configur/c_db_config.html)

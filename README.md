@@ -51,11 +51,9 @@ Workday into arrays and attributes that can be mapped to the Maximo.
 
   ![Setup Crafts Message Flow](images/SetupFlowLogicalDiagram.png)
 
-
 **Update Labor Flow Logical Diagram**
 
   ![Update Labor Using Integration Events Message Flow](images/LaborFlowLogicalDiagram.png)
-
 
 ## Steps
 
@@ -86,8 +84,20 @@ Read the instructions in the [Maximo Setup document](maximo_setup.md)
 Read the instructions in the [App Connect Setup document](app_connect_setup.md) 
 
 ### 5. Import, configure and run the App Connect message flows
-* In App Connect, import the [setup flow](maximo_workday_intial_setup_crafts.yaml) and the [integration events flow](maximo_workday_get_integration_events.yaml) using these [instructions](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_exportingimportingapiflows.htm)   
-* Open each flow and update the Maximo and Workday Connector node accounts wth your own [accounts](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_connectingtoaccounts.html). 
+* In App Connect, import the [Setup Flow](maximo_workday_intial_setup_crafts.yaml) and the [integration events flow](maximo_workday_get_integration_events.yaml) using these [instructions](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_exportingimportingapiflows.htm)   
+* Fromo the App Connect welcome dashboard page, click the Import fow tile. Drag and drop the ./flow/maximo_workday_intial_setup_crafts.yml flow 
+* Click on the Maximo and Workday Application nodes.   Create new accounts by entering your own credentials for Hostname user name and password [accounts](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_connectingtoaccounts.html). 
+* Test that each node is able to call the application service
+* In App Connect, import the [Get Integration Events flow](maximo_workday_get_integration_events.yml) and the [integration events flow](maximo_workday_get_integration_events.yaml) using these [instructions](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_exportingimportingapiflows.htm)   
+* From the App Connect welcome dashboard page, click the Import fow tile. Drag and drop the ./flow/maximo_workday_get_integration_events.yml flow 
+* Click on the Maximo and Workday Application nodes.   Create new accounts by entering your own credentials for Hostname user name and password accounts.
+* If you get a warning from the Scheduler node. Click on the Scheduler node and add Connection.    Pick a time interval like 5 minutes for re-running the flow. 
+* Click on the HTTP nodes.   Create new accounts by entering your own credentials Workday user name and password accounts. 
+
+
+* Fromo the App Connect welcome dashboard page, click the Import fow tile. Drag and drop the ./flow/maximo_workday_intial_setup_crafts.yml flow 
+* Click on the Maximo and Workday Application nodes.   Create new accounts by entering your own credentials for Hostname user name and password [accounts](https://www.ibm.com/support/knowledgecenter/SSTTDS_11.0.0/com.ibm.ace.icp.doc/certc_connectingtoaccounts.html). 
+
 
 ### 6. Test Run the Flows in App Connect
 * In App Connect run the setup crafts flow you imported in the previous step. Stop the flow after 10 minutes.  
@@ -103,6 +113,27 @@ Read the instructions in the [App Connect Setup document](app_connect_setup.md)
 * Be careful to not exceed the maximum character length allowed for an Maximo object attribute and map the data types for number, string, array or object.
 * Initially map the minium requires attributes for a given flow.
   
+
+## Troubleshooting Flows
+
+*Error Message*
+    {
+     "errorDetail": "{\"message\":\"BMXAA2528E - The combination of craft, skill level, vendor, and contract is not valid. Use the Select Value lookup to see a list of valid choices.\",\"status\":400}",
+     "id": "Zdcsz3JUiA",
+     "connectorName": "Maximo"
+    }
+*Solution*
+Check to see if the contract is expired.  If it has reactivate it.
+
+*Error Message*
+We can't complete the `upsertwithwhere` action on the `mxapilabor` object in Maximo because the request content or the URL is invalid.
+
+*Solution*
+Check to see if the craft name is greater than the number of characters in the database.  If it is increase the number of 
+characters in the database or modify the flow to trim craft name.    See the [maximum field sizes](https://www.ibm.com/support/knowledgecenter/en/SSHGFK_7.6.1/com.ibm.measap.doc/sag/c_configuring_maximo_field_lengths.html)
+Run CONFIGDB.BAT whenever you change Maximo field lengths.
+
+
 ## References
 See the [references document](references.md) for the list of references used to create this Code Pattern.
 
