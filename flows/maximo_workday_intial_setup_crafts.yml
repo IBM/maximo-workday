@@ -375,3 +375,4 @@ integration:
                       template: Done Calling Maximo Create Update Craft
   name: maximo_workday_intial_setup_crafts
 models: {}
+
