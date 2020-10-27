@@ -131,7 +131,7 @@ We can't complete the `upsertwithwhere` action on the `mxapilabor` object in Max
 *Solution*
 Check to see if the craft name is greater than the number of characters in the database.  If it is increase the number of 
 characters in the database or modify the flow to trim craft name.    See the [maximum field sizes](https://www.ibm.com/support/knowledgecenter/en/SSHGFK_7.6.1/com.ibm.measap.doc/sag/c_configuring_maximo_field_lengths.html)
-Run CONFIGDB.BAT whenever you change Maximo field lengths.
+Change the column field lengths [images](maximo_column_size.png)    You may also have to run CONFIGDB.BAT whenever you change Maximo field lengths.
 
 
 ## References
