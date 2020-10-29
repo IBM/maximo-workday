@@ -4,6 +4,7 @@
 
 1. [Create Report Maximo Skills](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#create-report-maximo-skills)
 2. [Create Report Maximo Crafts](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#create-report-maximo-crafts)
+3. [INT Maximo Worker Skills](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#create-report-INT-Maximo-Worker-Skills)
 3. [Configure Scheduled Integration - Maximo Person Sync](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#configure-scheduled-integration---maximo-person-sync)
 4. [Launch & Schedule Integration](https://github.ibm.com/Watson-IoT/maximo-workday/blob/master/workday_setup.md#launch--schedule-integration)
 
@@ -70,6 +71,32 @@ Report must be shared with Integration system Security  Group / Integration User
 https://wd2-impl-services1.workday.com/ccx/service/customreport2/ibmsrv_dpt5/lmcneil/RPT_INT_Maximo_Crafts?format=json
 
 
+## Create report INT Maximo Worker Skills
+
+- Login into Workday Tenant.
+
+- Security Required: Report Administrator, Report Writer
+
+- Access task “Create Custom Report”
+
+ ![Create Custom Report INT Maximo Skills.png](images/workday/Create_Custom_Report_Maximo_Skills_INT.png)
+
+ ![Report INT Maximo Skills - columns.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_Columns.png)
+
+Filter on Category value will depend as per Configuration Workbook.
+
+ ![Report INT Maximo Skills - Filter.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_Filters.png)
+
+ ![Report INT Maximo Skills - Prompts.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_Prompts.png)
+
+Report must be shared with Integration system Security  Group / Integration User.
+
+ ![Report INT Maximo Skills - Share.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_Share.png)
+ 
+ ![Report INT Maximo Skills - Advanced.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_Advanced.png)
+
+ ![Report INT Maximo Skills - View URLs.png](images/workday/Create_Custom_Report_INT_Maximo_Skills_View_URLs.png)
+ 
 
  ## Configure Scheduled Integration - Maximo Person Sync
 
@@ -107,22 +134,35 @@ https://wd2-impl-services1.workday.com/ccx/service/customreport2/ibmsrv_dpt5/lmc
 
 [How to Download Studio](https://community.workday.com/studio-download)
 
-- Download the clar file from : 
+- Download the clar file from : [WorkdayStudioCLAR](WorkdayStudioCLAR/INT_STD_MaximoPersonSyncCollection.clar)
 - Open Workday Studio
 - Navigate to File > Import.
 - From Wizard select Workday > CLAR file
 
-![Import CLAR](images/workday/Maximo_Person_Outbbound_Studio_Import_Clar.png)
+![Import CLAR - Wizard](images/workday/Maximo_Person_Outbbound_Studio_Import_Clar.png)
 
 Browse for the CLAR file from your local system
 
-![Import CLAR2](images/workday/Maximo_Person_Outbbound_Studio_Clar_location.png)
+![Import CLAR - File Location](images/workday/Maximo_Person_Outbbound_Studio_Clar_location.png)
 
 ![Studio Assembly](images/workday/Studio_Assembly.png)
 
 - Save the integration and Deploy to Workday Tenant.
 
-![Create BP](images/workday/Maximo_Person_Outbbound_Create_BP.png)
+**NOTE** If their is change in the fields of Core Connector Worker template, changes should be updated into Transformation stage in Studio integration.
+<details>
+
+    ![XSLTPlus Component](images/workday/XSLTPlus.png)
+
+    ![XMLToJSON Component](images/workday/XMLtoJSON.png)
+    
+
+
+</details>
+
+![Create Business Process](images/workday/Maximo_Person_Outbbound_Create_BP.png)
+
+Add another step Integration step after initiation.
 
 ![Create BP Integration Step](images/workday/Maximo_Person_Outbbound_Configure_BP_Integration_Step.png)
 
