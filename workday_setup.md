@@ -100,6 +100,9 @@ Report must be shared with Integration system Security  Group / Integration User
 
  ## Configure Scheduled Integration - Maximo Person Sync
 
+ 
+
+
  ### Configure Core Connector Worker Integration template 
 
 - Login into Workday Tenant.
@@ -113,6 +116,11 @@ Report must be shared with Integration system Security  Group / Integration User
 ![Configure Services](images/workday/Maximo_Person_Outbbound_Configure_services_2.png)
 
 ![Create Field Override Services](images/workday/Maximo_Person_Outbbound_Create_Field_Override_Service.png)
+
+
+**To identify which workers are to be send to Maximo we create a Calculated field with Job Profile, Company, Management Level as filter criteria. This can change according the business requirement.**
+
+![Calculated Field for Employee Eligibility](images/workday/Maximo_Person_Calc_Field_Employee_Eligibility.png)
 
 ![Configure Field Override Service](images/workday/Maximo_Person_Outbbound_Configure_FoS.png)
 
