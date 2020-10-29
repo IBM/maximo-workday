@@ -147,6 +147,12 @@ Browse for the CLAR file from your local system
 
 ![Studio Assembly](images/workday/Studio_Assembly.png)
 
+![Update Report Reference](images/workday/Maximo_Person_Outbbound_Studio_Update_Report_Reference.png)
+
+![Search Report](images/workday/Maximo_Person_Outbbound_Studio_Update_Report_SearchReport.png)
+
+![Select Worker Skill Report](images/workday/Maximo_Person_Outbbound_Studio_Update_Report_SelectReport.png)
+
 - Save the integration and Deploy to Workday Tenant.
 
 **NOTE** If their is change in the fields of Core Connector Worker template, changes should be updated into Transformation stage in Studio integration.
