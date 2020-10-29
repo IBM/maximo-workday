@@ -1,5 +1,4 @@
 # Steps
-1 
 
 ## 1. Create an IBM App Connect service in IBM Cloud
   - Create an [IBM Trial Account](https://cloud.ibm.com/registration/premium?lnk=ukCloudExp&lnk=STW_UK_BUHP_L1_BTN&psrc=NONE&pexp=DEF&lnk2=trial_Cloud) 
@@ -8,26 +7,7 @@
   - Select the free `Lite Plan` ![App Connect Lite Plan](images/app_connect_lite_plan.png)
   - Make note of the `service name` and `region`
   - Click `Create` button to create an App Connect Service to create message flows. 
- 
- ## Optionally Get App Connect by Installing Cloud Pak for Integration
-  - Get App Connect by installing Cloud Pak for Integration for OpenShift. Provision OpenShift Cluster from IBM Cloud. 
-  - Get Cloud Pack for Integration entitlement from Passport Advantage.
-  - Install using [instructions document](https://pages.github.ibm.com/demox/cloudpak-integration/cp4i-on-roks/)
-  - From IBM Cloud Dashboard click `Catalog`
-  - Search for CP4I in the  ![IBM Cloud Catalog](images/catalog.png)
-  - Select your Cluster
-  - Enter a unique project name like "workday-maximo"
-  - Enter a tag name like "workday-maximo"
-  - Create a parameter value for csDefaultAdminPasword at least 32 characters in length
-  - Accept license terms checkbox
-  - Click `Install` button to   ![install Clout Pak for Integration](images/cloud_pak_for_integration_install.png) to your cluster  &nbsp; 
-  - A new browser tab will open showing  apply the `in progress`    ![Cloud Pak for Integration entitlement](images/cloud_pak_for_integration_install_progress.png) to your cluster  &nbsp;  
-  - Click `show logs` button to see the details of the installation progress
-  - The Worksspace is created
-  - Click "Apply Plan"  ![in your workspace](images/cloud_pak_for_integration_workspace.png)
-  - Click "Offering Dashboard" ![IBM Cloud Catalog](images/catalog.png) Accept token exceptions
-  - Select Red Hat authentication mechanism for  ![OpenShif Authenticationt ](images/cloud_pak_for_integration_authentication.png]) which will then open the 
-   
+  
 ##  2.  Launch App Connect Dashboard Using IBM Cloud
   - Launch the App Connect Service Dashboard from the IBM Cloud `navigation menu`,  choose `resource` to see the list of services.
   - Expand `Cloud Foundry Services`,  click on the App Connect service name you created in the previous step.  ![App Connect Service in Resources](images/app_connect_resource.png)
@@ -55,15 +35,15 @@
   - When asked in the terminal  `Enter the additional startup options separated by spaces:` enter blank 
   - Go to App Connect `Private Networks`  and `Networks` to see the new network connection![App Connect Networks](images/app_connect_setup_networks_connected.png) &nbsp;  
 
-## 4.  Create an App Connect Application Connection for Maximo 
+## 4.  Update App Connect Application Connection for Maximo 
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
-  - Click on `Applications`tab ![Add Application](images/app_connect_maximo_catalog_application.png) and `Add Account` option&nbsp; 
+  - Click on `Applications`tab ![Update Account](images/app_connect_updatemaximoaccount.png) and `Update Account` option&nbsp; 
   - Enter your Maximo `Hostname`, `User name`,  `Password` and `Network` name you created in in previous configure App Connect Secure Gateway Client `Add your API or web service now` ![Add Application Details](images/app_connect_maximo_catalog_application_network.png) &nbsp;  
   - You should now be able to connect message flows to Maximo.
 
 ## 5.  Create an App Connect Application Connection for Workday 
   - Click on `Catalog` menu on the App Connect Dashboard ![App Connect Catalog](images/app_connect_catalog.png) &nbsp; 
-  - Click on `Applications`tab ![Add Application](images/app_connect_workday_catalog_application.png) and `Add Account` option&nbsp; 
+  - Click on `Applications`tab ![Update Account](images/app_connect_workday_catalog_application.png) and `Add Account` option&nbsp; 
   - Enter your Workday `Hostname`, `User name`,  `Password` &nbsp;  
   - You should now be able to connect message flows to Workday.
 
