@@ -126,6 +126,115 @@ Report must be shared with Integration system Security  Group / Integration User
 
 ![Integration_Field_Attributes](images/workday/Maximo_Person_Outbbound_Configure_Integration_Attribute.png)
 
+The Fields Attributes are selected based on the requirement. We have considered the below fields:
+**Worker Personal Data Section Fields** 
+
+    Name Data / Name Type 
+
+    Name Data / First Name 
+
+    Name Data / Middle Name 
+
+    Name Data / Last Name
+
+    Gender
+
+    Address Data / Address Line Data
+
+    Address Data / Municipality
+
+    Address Data / Submunicipality
+
+    Address Data / Region
+
+    Address Data / Subregion
+
+    Address Data / Postal Code
+
+    Phone Data / Phone Area Code
+
+    Phone Data / Phone Number
+
+    Email Data / Email Address
+
+**Worker Status Data Section Fields**
+    
+    
+    Employee Status
+    
+    Active
+    
+    Hire Date
+    
+    End Employment Date
+    
+    Rehire Date
+
+**Worker Position Data Section Fields**
+   
+    Position Title
+
+    Business Title
+
+    Worker Type
+
+    Scheduled Weekly Hours
+
+    Default Weekly Hours
+
+    Pay Rate Type
+
+    Organization Data / Organization
+
+    Organization Data / Organization Type
+
+    Work Hours Profile
+
+    Job Profile
+
+    Management Level
+
+    Business Site
+
+    Business Site Name
+
+    Business Site Address Line Data
+
+    Business Site Municipality
+
+    Business Site Submunicipality
+
+    Business Site Region
+
+    Business Site Subregion
+
+    Business Site Postal Code
+
+    Business Site Country
+
+    Supervisor / Supervisor ID
+
+
+**Worker Qualification Data Section Fields**
+
+    Competency Achievement
+
+    Competency Achievement / Competency
+
+    Competency Achievement / Competency Level
+
+    Certification Achievement / Certification
+
+    Certification Achievement / Certification Name
+
+    Certification Achievement / Certification Issuer
+
+    Certification Achievement / Expiration Date
+
+More fields can be added but they would also need to be updated in Studio Integration.
+
+![Creating Document Tag](images/workday/Maximo_Person_Outbbound_CreateDocumentTag.png)
+
 ![Integration_Field_Attributes_1](images/workday/Maximo_Person_Outbbound_Configure_Integration_Field_Attributes_1.png)
 
 ![Integration_Field_Attributes_3](images/workday/Maximo_Person_Outbbound_Configure_Integration_Field_Attributes_2.png)
@@ -166,9 +275,9 @@ Browse for the CLAR file from your local system
 **NOTE** If their is change in the fields of Core Connector Worker template, changes should be updated into Transformation stage in Studio integration.
 <details>
 
-    ![XSLTPlus Component](images/workday/XSLTPlus.png)
+![XSLTPlus Component](images/workday/XSLTPlus.png)
 
-    ![XMLToJSON Component](images/workday/XMLtoJSON.png)
+![XMLToJSON Component](images/workday/XMLtoJSON.png)
     
 
 
@@ -193,3 +302,20 @@ Add another step Integration step after initiation.
 
 ![Configure Schedule Parameters](images/workday/Maximo_Person_Outbbound_Configure_Schedule_Parameters.png)
 
+
+
+**Note:** All(or Some) of the above configurations/code patterns may change based on Business Requirement or Workday releases. Please consult Workday Implementation Consultant for latest developments.
+
+## Troubleshooting.
+
+- New fields selected in CCW Template are coming in the output.  
+  *Ensure the Integration Security User has access to all the fields.
+  Update the new fields in XML Transformation and worker.xsd file in Tranformation Step.*
+
+- Integration is running successfully, but not getting the JSON ouptut file.
+  *Confirm the Output Document tag for Core - Connector Worker is "MaximoPerson".
+  "Enable XML Output" integration Attribute for INT_STD_MaximoPersonSync integration to confirm if the XML output is getting generated.
+*
+- Error in JSON Transformation 
+  *"Enable XML Output" integration Attribute for INT_STD_MaximoPersonSync integration to confirm if the XML output is getting generated.
+  Update the XSD file for the XML to JSON component.*
